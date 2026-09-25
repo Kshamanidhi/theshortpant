@@ -212,7 +212,10 @@ export default function Navbar() {
             <NavLink
               key={link}
               label={link}
-              className={link === "work" ? undefined : "hide-on-mobile"}
+              // "about"/"connect" hidden everywhere for now (not just
+              // mobile) — kept in the map rather than deleted so they're
+              // easy to bring back later.
+              className={link === "work" ? undefined : "hide-for-now"}
               {...navLinkProps(link, path, navigate)}
             />
           ))}

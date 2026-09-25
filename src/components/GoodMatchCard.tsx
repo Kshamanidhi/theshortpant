@@ -64,7 +64,7 @@ export default function GoodMatchCard() {
                 ))}
               </ul>
 
-              <a href="mailto:designer@wormit.co" className="gm-cta">
+              <a href="mailto:kshamanidhikg@gmail.com" className="gm-cta">
                 Let's find out <span aria-hidden="true">→</span>
               </a>
             </div>

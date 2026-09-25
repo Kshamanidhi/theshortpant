@@ -16,6 +16,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Temporarily hidden regardless of viewport (e.g. Navbar's about/connect
+   links) — !important since NavLink sets `display` via inline style,
+   which otherwise beats a plain class rule. */
+.hide-for-now {
+  display: none !important;
+}
+
 /* Nav-link anchor targets (Navbar.tsx: #about, #work, #connect) — offsets
    the scroll landing spot so the fixed navbar (96px tall) doesn't cover
    the top of the section it just jumped to. */

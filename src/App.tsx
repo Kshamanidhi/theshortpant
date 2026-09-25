@@ -11,7 +11,7 @@ import Closing from "./sections/Closing";
 import WorkPage from "./pages/WorkPage";
 import { RouterProvider, useRouter } from "./lib/router";
 
-function HomePage() {
+function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   return (
     <>
       <Hero />
@@ -25,19 +25,21 @@ function HomePage() {
         <CurrentlyExploring />
       </div>
       <Closing />
+      {showBrushOverlay && <BrushOverlay />}
     </>
   );
 }
 
-function Routes() {
+function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   const { path } = useRouter();
-  return <main>{path === "/work" ? <WorkPage /> : <HomePage />}</main>;
+  return <main>{path === "/work" ? <WorkPage /> : <HomePage showBrushOverlay={showBrushOverlay} />}</main>;
 }
 
 export default function App() {
-  // BrushOverlay is a mouse-drag drawing canvas — it doesn't make sense as
-  // a touch interaction, so it's left unmounted below desktop width
-  // instead of just visually hidden (no point wiring up its listeners).
+  // BrushOverlay is a mouse-drag drawing canvas, home page only — it
+  // doesn't make sense as a touch interaction (left unmounted below
+  // desktop width, no point wiring up its listeners), and is scoped to
+  // the home page rather than every route.
   const [showBrushOverlay] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 1025px)").matches
   );
@@ -45,8 +47,7 @@ export default function App() {
   return (
     <RouterProvider>
       <Navbar />
-      <Routes />
-      {showBrushOverlay && <BrushOverlay />}
+      <Routes showBrushOverlay={showBrushOverlay} />
       <InkSplash />
     </RouterProvider>
   );

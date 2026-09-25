@@ -51,10 +51,10 @@ export default function Closing() {
           }}
         >
           <a
-            href="mailto:designer@wormit.co"
+            href="mailto:kshamanidhikg@gmail.com"
             style={{ color: "var(--color-fg)", textDecoration: "none" }}
           >
-            designer@wormit.co
+            kshamanidhikg@gmail.com
           </a>
           <a
             href="https://www.linkedin.com/in/kshamanidhi/"
