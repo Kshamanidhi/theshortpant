@@ -12,10 +12,6 @@ const LOTTIE_RENDER_CONFIG = {
   devicePixelRatio: typeof window !== "undefined" ? Math.max(window.devicePixelRatio || 1, 2) : 2,
 };
 
-const PLACEHOLDER_EXTRA =
-  "Replace with the real one-line reasoning behind this observation.";
-
-// Placeholder copy — swap each for a real observation before shipping.
 // Must have exactly NUM_COLUMNS * CARDS_PER_COLUMN entries — one card per
 // grid slot, no repeats.
 const CARD_CONTENT: Card[] = [
@@ -103,7 +99,11 @@ const CARD_CONTENT: Card[] = [
     thumbnail: "/obs-ios.png",
     fit: "cover",
   },
-  { claim: "[Observation #16]", extra: PLACEHOLDER_EXTRA },
+  {
+    claim: "Color Neighbors:",
+    extra: "The same grey looks lighter next to black and darker next to white. You can't judge a color on its own, its neighbors decide how it reads.",
+    thumbnail: "/obs-color-neighbors.png",
+  },
 ];
 
 const NUM_COLUMNS = 4;
