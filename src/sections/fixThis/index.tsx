@@ -93,7 +93,7 @@ export default function FixThis() {
             letterSpacing: "0.02em",
           }}
         >
-          fix this
+          {completed ? "yayy, you fixed it!" : "fix this"}
         </span>
         {activeRound && !completed && (
           <h2
