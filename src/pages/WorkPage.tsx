@@ -137,7 +137,7 @@ const PROJECTS: WorkProject[] = [
     // the slide, one near the project card and one near the screenshots,
     // as a quiet flourish rather than crowding the reveal itself.
     motionIcons: [
-      { src: "/home-major-ug-animation.json", size: "6rem", rotate: -5, left: "14rem", bottom: "9rem" },
+      { src: "/home-major-ug-animation.json", size: "6rem", rotate: -5, left: "14rem", bottom: "7.5rem" },
       { src: "/city-lounge-animation.json", size: "5.5rem", rotate: 7, right: "10rem", bottom: "9rem" },
     ],
   },

@@ -51,6 +51,14 @@ export default function Closing() {
           }}
         >
           <a
+            href="https://docs.google.com/document/d/13rxQu4Je5JZznq2kB6ff_EffYY2_PGGrad7-5BUDPr0/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--color-fg)", textDecoration: "none" }}
+          >
+            Resume
+          </a>
+          <a
             href="mailto:kshamanidhikg@gmail.com"
             style={{ color: "var(--color-fg)", textDecoration: "none" }}
           >
