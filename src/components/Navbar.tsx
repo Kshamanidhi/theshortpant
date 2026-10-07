@@ -101,6 +101,7 @@ function NavLink({
         fontSize: "1rem",
         color: "var(--color-fg)",
         textDecoration: "none",
+        whiteSpace: "nowrap",
       }}
     >
       <span style={tickerStyle}>{label}</span>
@@ -109,13 +110,20 @@ function NavLink({
   );
 }
 
+// Links that are their own pages, rather than anchors on the home page.
+const PAGE_ROUTES: Record<string, string> = {
+  work: "/work",
+  "back pocket": "/back-pocket",
+};
+
 function navLinkProps(link: string, path: string, navigate: (to: string) => void) {
-  if (link === "work") {
+  const route = PAGE_ROUTES[link];
+  if (route) {
     return {
-      href: "/work",
+      href: route,
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        navigate("/work");
+        navigate(route);
         window.scrollTo({ top: 0 });
       },
     };
@@ -208,14 +216,14 @@ export default function Navbar() {
 
         {/* Nav links + social */}
         <div className="flex items-center" style={{ gap: "2.5rem" }}>
-          {["about", "work", "connect"].map((link) => (
+          {["about", "work", "back pocket", "connect"].map((link) => (
             <NavLink
               key={link}
               label={link}
               // "about"/"connect" hidden everywhere for now (not just
               // mobile) — kept in the map rather than deleted so they're
               // easy to bring back later.
-              className={link === "work" ? undefined : "hide-for-now"}
+              className={link in PAGE_ROUTES ? undefined : "hide-for-now"}
               {...navLinkProps(link, path, navigate)}
             />
           ))}

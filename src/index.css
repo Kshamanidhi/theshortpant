@@ -627,191 +627,151 @@ body {
   fill: white !important;
 }
 
-/* "Are we a good match?" card (components/GoodMatchCard.tsx, used in
-   Closing) — a torn-paper card, tilted the way Jackie Zhang's portfolio
-   tilts its stacked device mockups. Checking an item reveals its sketch(es)
-   elsewhere on the card; the checkbox itself strikes through the label. */
+/* "Are we a good match?" (components/GoodMatchCard.tsx, used in Closing).
+   Open layout, no paper: a centred heading over a thin rule, then three
+   columns — one illustration left, the checklist, two illustrations right.
+   Each checkbox reveals one illustration (left to right, in checklist
+   order). Hidden illustrations keep their space, so revealing one never
+   shifts the layout. */
 .gm-wrap {
-  position: relative;
-  width: clamp(24rem, 75vw, 58rem);
+  width: min(76rem, 100%);
   margin: 0 auto;
-}
-
-.gm-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1344 / 893;
-  transform: rotate(0deg);
-  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Only tilts once all three boxes are checked — a little payoff for
-   finishing the list, inspired by Jackie Zhang's tilted stacked cards. */
-.gm-card.gm-tilted {
-  transform: rotate(-2deg);
-}
-
-.gm-page-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-/* typewriter-page 1.png has a real transparent margin baked in around the
-   opaque paper (for its drop shadow) — the paper sits inset at roughly
-   x:139-1221, y:75-767 within the 1344x893 canvas, not flush with the
-   image's own edges. Content padding has to match that inset (not just
-   look roughly right) or it renders past the paper into the transparent
-   margin. Percentages here are intentional: CSS resolves padding-top/
-   bottom against the containing block's WIDTH, not height, so the top/
-   bottom values are already converted (75/1344, (893-767)/1344) rather
-   than naively using the image's own height-relative fractions. */
-.gm-content {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 8.5% 12% 13% 13.5%;
-  display: flex;
-  flex-direction: column;
+  color: var(--color-fg);
 }
 
 .gm-heading {
-  margin: 0 0 0.75rem;
-  font-size: clamp(0.875rem, 1.2vw, 1.0625rem);
-  color: #2a251f;
+  margin: 0 0 1.1rem;
+  text-align: center;
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
 }
 
 .gm-rule {
+  width: min(42rem, 100%);
   height: 1px;
-  background: #2a251f;
-  opacity: 0.4;
-  margin-bottom: clamp(1rem, 3vw, 1.75rem);
+  margin: 0 auto;
+  background: var(--color-fg);
 }
 
-.gm-body {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: clamp(1rem, 3vw, 2rem);
-  min-height: 0;
+.gm-stage {
+  /* Keeps the tallest figure's head clear of the rule above it. */
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, max-content) auto;
+  justify-content: center;
+  align-items: end;
+  column-gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.gm-left {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.gm-heads {
+.gm-side {
   display: flex;
   align-items: flex-end;
-  gap: clamp(0.25rem, 0.75vw, 0.625rem);
-  height: clamp(6rem, 13vw, 9.5rem);
-  margin-bottom: clamp(1.5rem, 4.5vw, 3rem);
+  gap: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 
-.gm-head {
-  height: 100%;
+/* Heights from the reference: the butterfly girl stands tallest, the
+   hand-on-hip girl a little shorter, the sitting scene shortest. Width
+   follows each image's own aspect ratio. */
+.gm-illo {
+  display: block;
   width: auto;
+  max-width: none;
   opacity: 0;
-  transform: scale(0.85) rotate(-4deg);
+  transform: translateY(14px) scale(0.96);
+  transform-origin: bottom center;
   transition:
-    opacity 260ms cubic-bezier(0.165, 0.84, 0.44, 1),
-    transform 260ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity 320ms cubic-bezier(.165, .84, .44, 1),
+    transform 320ms cubic-bezier(.165, .84, .44, 1);
+  pointer-events: none;
 }
 
-.gm-head-2 {
-  transform: scale(0.85) rotate(3deg);
+.gm-illo-butterfly {
+  height: clamp(15rem, 23vw, 21rem);
 }
 
-.gm-head-3 {
-  transform: scale(0.85) rotate(-3deg);
+.gm-illo-sitting {
+  height: clamp(10rem, 16vw, 14.5rem);
 }
 
-.gm-head.gm-visible {
+.gm-illo-hip {
+  height: clamp(14rem, 21vw, 19.5rem);
+}
+
+.gm-illo.gm-visible {
   opacity: 1;
-  transform: scale(1) rotate(-2deg);
-}
-
-.gm-head-2.gm-visible {
-  transform: scale(1) rotate(1.5deg);
-}
-
-.gm-head-3.gm-visible {
-  transform: scale(1) rotate(-1.5deg);
+  transform: translateY(0) scale(1);
 }
 
 .gm-checklist {
   list-style: none;
-  margin: 0 0 clamp(1rem, 3vw, 1.75rem);
-  padding: 0;
+  margin: 0;
+  padding: 0 0 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  gap: clamp(0.75rem, 1.4vw, 1rem);
 }
 
 .gm-check-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   text-align: left;
   font-family: inherit;
+  color: inherit;
 }
 
 .gm-checkbox {
   flex: 0 0 auto;
-  width: 1.125rem;
-  height: 1.125rem;
-  border: 1.5px solid #2a251f;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid var(--color-fg);
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 180ms ease, border-color 180ms ease;
-}
-
-.gm-checkbox.gm-checked {
-  background: #2a251f;
-  border-color: #2a251f;
 }
 
 .gm-check-label {
-  font-size: clamp(0.8125rem, 1.6vw, 0.9375rem);
-  color: #2a251f;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
   transition: opacity 180ms ease;
 }
 
 .gm-check-label.gm-struck {
   text-decoration: line-through;
-  opacity: 0.55;
+}
+
+.gm-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.25rem;
 }
 
 .gm-cta {
-  align-self: flex-start;
-  margin-top: auto;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid #2a251f;
-  color: #2a251f;
+  border: 1px solid var(--color-fg);
+  color: var(--color-fg);
   text-decoration: none;
-  padding: 0.625rem 1.125rem;
-  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
   transition: background 180ms ease, color 180ms ease;
 }
 
 .gm-cta:hover {
-  background: #2a251f;
-  color: #f4ecdd;
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gm-illo,
+  .gm-check-label,
+  .gm-cta {
+    transition: none;
+  }
 }
 
 /* Work page — "Read more"/"Read less" toggle per project */
@@ -845,38 +805,192 @@ body {
   color: var(--color-accent);
 }
 
-.gm-figure-slot {
-  position: relative;
-  flex: 0 0 clamp(9rem, 20vw, 14rem);
+/* Back Pocket (src/pages/backPocket) — side projects as cards loosely
+   scattered on a desk. Wrapping flex (not absolute positions) so the
+   scatter holds at any width; each card's own tilt, size, and vertical
+   nudge supply the messiness. */
+.bp-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3.5rem 4rem;
+  max-width: 76rem;
+  margin: 0 auto;
 }
 
-.gm-figure {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: clamp(15rem, 32vw, 24rem);
-  max-height: 100%;
-  width: auto;
-  transform: rotate(3deg) translateY(16px);
-  opacity: 0;
+/* Slow ambient bob. Purely decorative, so it's long, low-amplitude, and
+   symmetric (ease-in-out, alternate) — no card ever lands or rests. */
+@keyframes bp-drift {
+  from {
+    transform: translateY(-5px) rotate(-0.6deg);
+  }
+  to {
+    transform: translateY(5px) rotate(0.6deg);
+  }
+}
+
+.bp-drift {
+  animation: bp-drift 6s ease-in-out infinite alternate;
+}
+
+.bp-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0.6rem 0.85rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: content-box;
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+  transform: rotate(var(--bp-rotate, 0deg));
   transition:
-    opacity 300ms cubic-bezier(0.165, 0.84, 0.44, 1),
-    transform 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  pointer-events: none;
+    transform 240ms cubic-bezier(.165, .84, .44, 1),
+    box-shadow 240ms cubic-bezier(.165, .84, .44, 1);
 }
 
-.gm-figure.gm-visible {
-  opacity: 1;
-  transform: rotate(3deg) translateY(0);
+.bp-card-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.7rem;
+  line-height: 1.35;
+}
+
+/* Hover/focus picks the card up: it straightens and lifts toward you. */
+@media (hover: hover) {
+  .bp-card:hover {
+    transform: rotate(0deg) translateY(-6px) scale(1.03);
+    box-shadow: 0 1rem 2.25rem rgba(0, 0, 0, 0.14);
+  }
+}
+
+.bp-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
+}
+
+/* Preview overlay for card-only items (no page of their own) */
+@keyframes bp-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bp-figure-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  /* No align/justify-content centring — that clips the top of anything
+     taller than the viewport. The figure's own margin: auto centres it
+     and still lets the overlay scroll when a write-up runs long. */
+  overflow-y: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  animation: bp-overlay-in 200ms cubic-bezier(.165, .84, .44, 1) both;
+}
+
+.bp-overlay-figure {
+  margin: auto;
+  padding: 0.75rem 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.14);
+  font-size: 0.9375rem;
+  box-sizing: border-box;
+  animation: bp-figure-in 240ms cubic-bezier(.165, .84, .44, 1) both;
+}
+
+.bp-overlay-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-fg);
+  cursor: pointer;
+}
+
+.bp-overlay-close:hover {
+  color: var(--color-accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gm-card,
-  .gm-head,
-  .gm-checkbox,
-  .gm-check-label,
-  .gm-cta,
-  .gm-figure {
+  .bp-drift,
+  .bp-overlay,
+  .bp-overlay-figure {
+    animation: none;
+  }
+
+  .bp-card {
     transition: none;
+  }
+}
+
+/* Downloadable files on a Back Pocket item page (ProjectSlide `downloads`) */
+.bp-downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 1.1rem;
+  border: 1px dashed var(--color-border);
+  background: color-mix(in srgb, var(--color-border) 10%, var(--color-bg));
+}
+
+/* Media wider than the text column on text-only slides (ProjectSlide
+   `breakout`). Centred on the column: push the left edge to the column's
+   midpoint, then pull back by half its own width. On narrow screens
+   100vw - 4rem is the column width anyway, so it never overflows. */
+.slide-breakout {
+  width: min(48rem, calc(100vw - 4rem));
+  margin-left: 50% !important;
+  transform: translateX(-50%);
+}
+
+/* Tool/brand marks above a slide title — slide in from the left once, on
+   load, staggered via inline animation-delay. Low-frequency and
+   decorative, so a gentle ease-out-quart over ~520ms. */
+@keyframes slide-logo-in {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-logo-in {
+  animation: slide-logo-in 520ms cubic-bezier(.165, .84, .44, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-logo-in {
+    animation: none;
   }
 }

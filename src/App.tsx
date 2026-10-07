@@ -9,6 +9,8 @@ import SelectedWork from "./sections/SelectedWork";
 import CurrentlyExploring from "./sections/CurrentlyExploring";
 import Closing from "./sections/Closing";
 import WorkPage from "./pages/WorkPage";
+import BackPocketPage from "./pages/backPocket/BackPocketPage";
+import BackPocketItemPage from "./pages/backPocket/BackPocketItemPage";
 import { RouterProvider, useRouter } from "./lib/router";
 
 function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
@@ -32,7 +34,16 @@ function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
 
 function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   const { path } = useRouter();
-  return <main>{path === "/work" ? <WorkPage /> : <HomePage showBrushOverlay={showBrushOverlay} />}</main>;
+  const backPocketId = path.match(/^\/back-pocket\/([^/]+)\/?$/)?.[1];
+
+  let page;
+  if (path === "/work") page = <WorkPage />;
+  else if (path === "/back-pocket" || path === "/back-pocket/") page = <BackPocketPage />;
+  // Keyed by id so moving between two items starts the new one collapsed.
+  else if (backPocketId) page = <BackPocketItemPage key={backPocketId} id={backPocketId} />;
+  else page = <HomePage showBrushOverlay={showBrushOverlay} />;
+
+  return <main>{page}</main>;
 }
 
 export default function App() {

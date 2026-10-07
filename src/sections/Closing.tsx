@@ -37,7 +37,9 @@ export default function Closing() {
         padding: "8rem 2rem",
       }}
     >
-      <div ref={contentRef} style={{ maxWidth: "64rem" }}>
+      {/* 76rem: room for the good-match layout's three columns (figure,
+          checklist, two figures) without wrapping the checklist lines. */}
+      <div ref={contentRef} style={{ maxWidth: "76rem", width: "100%" }}>
         <div className="hide-on-mobile-tablet" style={{ marginBottom: "3rem" }}>
           <GoodMatchCard />
         </div>
