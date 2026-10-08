@@ -1,1 +1,10 @@
+# .in is an alias of the .com site: send every .in address (bare and www,
+# http and https) to the same path on theshortpant.com, permanently. These
+# must sit above the SPA fallback below, since Netlify uses the first match.
+http://theshortpant.in/*       https://theshortpant.com/:splat  301!
+https://theshortpant.in/*      https://theshortpant.com/:splat  301!
+http://www.theshortpant.in/*   https://theshortpant.com/:splat  301!
+https://www.theshortpant.in/*  https://theshortpant.com/:splat  301!
+
+# Single-page app: every route is rendered client-side by index.html.
 /*  /index.html  200
