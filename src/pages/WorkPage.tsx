@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "../lib/gsap";
 import ProjectSlide, { type WorkProject } from "../components/ProjectSlide";
+import { IS_PRERENDER } from "../lib/prerender";
 
 // Copy grounded in what was actually described for each project — no
 // invented metrics. Logo and project-card are dummy placeholders until
@@ -131,7 +132,7 @@ export default function WorkPage() {
   const trackRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(initialIndexFromHash());
   const isAnimatingRef = useRef(false);
-  const [expanded, setExpanded] = useState<boolean[]>(() => PROJECTS.map(() => false));
+  const [expanded, setExpanded] = useState<boolean[]>(() => PROJECTS.map(() => IS_PRERENDER));
 
   // Set through GSAP (not a raw inline `transform` style) so GSAP's own
   // transform cache starts out correctly. A plain CSS transform survives

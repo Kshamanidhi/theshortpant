@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import InkSplash from "./components/InkSplash";
 import BrushOverlay from "./components/BrushOverlay";
@@ -12,6 +12,7 @@ import WorkPage from "./pages/WorkPage";
 import BackPocketPage from "./pages/backPocket/BackPocketPage";
 import BackPocketItemPage from "./pages/backPocket/BackPocketItemPage";
 import { RouterProvider, useRouter } from "./lib/router";
+import { pageTitle } from "./lib/pageMeta";
 
 function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   return (
@@ -34,6 +35,9 @@ function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
 
 function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   const { path } = useRouter();
+  useEffect(() => {
+    document.title = pageTitle(path);
+  }, [path]);
   const backPocketId = path.match(/^\/back-pocket\/([^/]+)\/?$/)?.[1];
 
   let page;
@@ -46,7 +50,7 @@ function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   return <main>{page}</main>;
 }
 
-export default function App() {
+export default function App({ initialPath }: { initialPath?: string } = {}) {
   // BrushOverlay is a mouse-drag drawing canvas, home page only — it
   // doesn't make sense as a touch interaction (left unmounted below
   // desktop width, no point wiring up its listeners), and is scoped to
@@ -55,8 +59,15 @@ export default function App() {
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 1025px)").matches
   );
 
+  // Built pages ship with this route's HTML pre-rendered into #root for
+  // crawlers, kept invisible (see index.html) so visitors never see it swap
+  // for the live app. Once the app has committed its own DOM, show #root.
+  useEffect(() => {
+    document.getElementById("root")?.removeAttribute("data-prerendered");
+  }, []);
+
   return (
-    <RouterProvider>
+    <RouterProvider initialPath={initialPath}>
       <Navbar />
       <Routes showBrushOverlay={showBrushOverlay} />
       <InkSplash />

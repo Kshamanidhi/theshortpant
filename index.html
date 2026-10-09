@@ -28,6 +28,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+
+    <!-- Built pages carry their content pre-rendered in #root (for search
+         engines and link scrapers that don't run JavaScript). Visitors get
+         the live app instead: the static copy stays invisible until App
+         mounts and removes data-prerendered. Without JavaScript, show it. -->
+    <style>#root[data-prerendered] { visibility: hidden; }</style>
+    <noscript><style>#root[data-prerendered] { visibility: visible; }</style></noscript>
   </head>
   <body>
     <div id="root"></div>

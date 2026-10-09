@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "../../lib/router";
 import ProjectSlide from "../../components/ProjectSlide";
+import { IS_PRERENDER } from "../../lib/prerender";
 import { BACK_POCKET_ITEMS } from "./data";
 
 export default function BackPocketItemPage({ id }: { id: string }) {
   const { navigate } = useRouter();
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(IS_PRERENDER);
   const item = BACK_POCKET_ITEMS.find((it) => it.id === id && it.detail);
 
   // Unknown id, or a card-only item (no page of its own) — fall back to

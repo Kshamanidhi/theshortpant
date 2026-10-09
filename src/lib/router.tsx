@@ -7,8 +7,10 @@ type RouterContextValue = {
 
 const RouterContext = createContext<RouterContextValue | null>(null);
 
-export function RouterProvider({ children }: { children: ReactNode }) {
-  const [path, setPath] = useState(() => window.location.pathname);
+// `initialPath` lets the build-time pre-renderer (src/entry-server.tsx) pick
+// the page to render in Node, where there's no window.location to read.
+export function RouterProvider({ children, initialPath }: { children: ReactNode; initialPath?: string }) {
+  const [path, setPath] = useState(() => initialPath ?? window.location.pathname);
 
   useEffect(() => {
     function onPopState() {
