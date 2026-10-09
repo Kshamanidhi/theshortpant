@@ -1,0 +1,6 @@
+# Everything is public. The sitemap is generated at build time from the
+# same page list as the pre-renderer (scripts/prerender.mjs).
+User-agent: *
+Allow: /
+
+Sitemap: https://theshortpant.com/sitemap.xml

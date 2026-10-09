@@ -1,7 +1,7 @@
 // Build step (runs after `vite build` and the SSR build, see package.json):
-// renders every page to static HTML and writes it into dist/, so search
-// engines and link scrapers that don't run JavaScript get real content and
-// per-page title/description/preview tags. Netlify serves /work from
+// renders every page to static HTML and writes it into dist/ (plus
+// sitemap.xml), so search engines and link scrapers that don't run
+// JavaScript get real content and per-page title/description/preview tags. Netlify serves /work from
 // work.html, /back-pocket/font-saver from back-pocket/font-saver.html, etc.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -53,3 +53,13 @@ for (const page of PAGES) {
   writeFileSync(out, html);
   console.log(`prerendered ${page.path.padEnd(32)} → dist/${page.file}`);
 }
+
+// Sitemap for search engines, built from the same page list so a new page
+// can't be pre-rendered but left out of it. No <lastmod>: every deploy would
+// stamp every page with the same date, which tells crawlers nothing.
+const sitemap =
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  PAGES.map((page) => `  <url><loc>${SITE}${page.path === "/" ? "/" : page.path}</loc></url>`).join("\n") +
+  `\n</urlset>\n`;
+writeFileSync(resolve(dist, "sitemap.xml"), sitemap);
+console.log(`sitemap: ${PAGES.length} pages → dist/sitemap.xml`);
