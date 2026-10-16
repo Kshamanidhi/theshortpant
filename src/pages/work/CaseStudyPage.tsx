@@ -196,6 +196,21 @@ export default function CaseStudyPage({ id }: { id: string }) {
           <section id="overview">
             <h2>Overview</h2>
             <Paragraphs items={cs.overview} />
+            <h3 className="cs-sub">What I owned</h3>
+            <Bullets items={cs.ownership} />
+            <h3 className="cs-sub">Who else was involved</h3>
+            <dl className="cs-team">
+              {cs.team.map((member) => (
+                <div key={member.who}>
+                  <dt>
+                    {member.who} <span>· {member.role}</span>
+                  </dt>
+                  <dd>
+                    <T value={member.did} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </section>
 
           <section id="problem">

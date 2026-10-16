@@ -24,6 +24,9 @@ export type CaseStudy = {
   facts: { label: string; value: Text }[];
   heroImage: string;
   overview: Text[];
+  // Shown in Overview: what I personally did, then everyone else's part.
+  ownership: Text[];
+  team: { who: string; role: string; did: Text }[];
   problem: Text[];
   constraints: Text[];
   decisions: Decision[];
@@ -49,36 +52,63 @@ export const WORK_PROJECTS: WorkProject[] = [
     id: "difc",
     title: "Redesigned a Lifestyle App",
     line: "One app for everyone inside DIFC: employees, guests and students.",
-    outcome: todo("One-line outcome, ideally with your strongest number"),
+    outcome: "Client-approved and shipped across 3 product pillars.",
     tags: ["Product & motion designer", "iOS · Android", "Apr 25 – Jun 26", "DIFC · Magure"],
     cover: "/wrk-difc-wrk1.png",
     caseStudy: {
-      headline: "One app for everyone inside Dubai's financial district",
+      headline: "Three products, 40+ services, one consistent DIFC+ experience",
       tldr: {
-        problem: todo("One line: what was broken, and for whom"),
-        did: "Built the design system across light and dark, and designed the motion icons.",
-        result: todo("One line, ideally with your strongest number"),
+        problem: "DIFC+ was growing into three products, and 40+ services had to feel like one app.",
+        did: "Built the design tokens and component library, the information architecture, and the high-fidelity UI for the DIFC+ dashboard and TenX.",
+        result: "Client-approved and shipped: 3 pillars, 100+ screens each, on one system of 260+ tokens.",
       },
       facts: [
         { label: "Role", value: "Product & motion designer" },
         { label: "Client", value: "DIFC" },
         { label: "Agency", value: "Magure INC" },
         { label: "Timeline", value: "Apr 25 – Jun 26" },
-        { label: "Team", value: todo("e.g. 2 designers, 4 devs") },
+        { label: "Team", value: "3 designers · PMs · CTO" },
       ],
       heroImage: "/wrk-difc-wrk1.png",
       overview: [
         "An all-in-one app for everyone inside DIFC, Dubai's financial district: employees, guests and students. They find services, get around and grab perks without switching between five different apps.",
-        todo("What you owned vs. the team, in two lines"),
+        "DIFC+ was expanding across three product areas at once: the core DIFC+ app, TenX, and property management.",
+      ],
+      ownership: [
+        "Created the design tokens and component library from the DIFC brand guidelines.",
+        "Developed the information architecture and wireframes, with reviews from Nitin.",
+        "Designed the high-fidelity UI for the DIFC+ dashboard and TenX.",
+        "Guided the junior UI designer through end-of-project bug fixes, alongside Nitin.",
+        "Established the design foundation that was reused for Property Management.",
+      ],
+      team: [
+        {
+          who: "Nitin Prajapati",
+          role: "Lead Designer",
+          did: "Reviewed my wireframes and information architecture before stakeholder presentations, and owned the Property Management design using the system I created.",
+        },
+        {
+          who: "Junior UI Designer",
+          role: "Joined near the end",
+          did: "Resolved UI bugs under Nitin's and my guidance.",
+        },
+        {
+          who: "Product Managers & CTO",
+          role: "Requirements",
+          did: "Provided business and product requirements through the BRD and discussions, and reviewed the proposed information architecture and wireframes.",
+        },
       ],
       problem: [
-        todo("Your problem statement: who struggled, with what, and how you knew (research, data, stakeholders)"),
+        "DIFC+ was expanding across three product areas: the core DIFC+ app, TenX, and property management. The challenge was to translate business requirements and complex service workflows into a consistent, usable product experience.",
+        "I identified the key design challenges by reviewing the BRD and discussing requirements, technical constraints and product expectations with the Product Managers and CTO. Those conversations showed me the different user roles, the workflows each one needed, and how complex it would be to bring multiple services into one cohesive ecosystem.",
+        "From there, the focus was on structuring the experience, designing the workflows, and establishing a reusable design system that could support the product as it expanded.",
       ],
       constraints: [
         "Three audiences with different reasons to open the same app.",
         "One design system that had to hold up in both light and dark.",
         "A financial district trying to feel like a lifestyle brand.",
-        todo("Any technical, timeline or brand constraint"),
+        "Requirements arrived as a BRD: complex service workflows that had to become usable flows.",
+        "Several user roles, each with its own required workflows.",
       ],
       decisions: [
         {
@@ -99,11 +129,15 @@ export const WORK_PROJECTS: WorkProject[] = [
         steps: [{ label: "Sketch" }, { label: "Wireframe" }, { label: "Final", image: "/wrk-difc-wrk1.png" }],
       },
       outcome: {
-        paragraphs: [todo("What shipped, and what changed because of it")],
+        paragraphs: [
+          "The design was approved by the client and shipped. The foundation I built became the base for Property Management, the third pillar, which Nitin designed on top of my system.",
+        ],
         numbers: [
-          { value: todo("00%"), label: todo("what it measures") },
-          { value: todo("00"), label: todo("what it measures") },
-          { value: todo("00×"), label: todo("what it measures") },
+          { value: "40+", label: "services in one app" },
+          { value: "3", label: "product pillars" },
+          { value: "100+", label: "screens per pillar" },
+          { value: "120+", label: "primitive tokens" },
+          { value: "140+", label: "aliased tokens" },
         ],
       },
       reflections: [

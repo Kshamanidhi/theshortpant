@@ -1455,7 +1455,8 @@ body {
 /* Outcome numbers */
 .cs-numbers {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  /* 7rem lets up to five numbers share one row in the 44rem column. */
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -1520,4 +1521,33 @@ body {
   .dc-pane {
     transition: none;
   }
+}
+
+/* Case study: ownership + team, inside Overview */
+.cs-sub {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.cs-team {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.cs-team dt {
+  margin-bottom: 0.2rem;
+}
+
+.cs-team dt span {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.cs-team dd {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
 }
