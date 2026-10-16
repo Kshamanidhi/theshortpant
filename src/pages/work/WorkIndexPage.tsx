@@ -29,10 +29,28 @@ export default function WorkIndexPage() {
         {WORK_PROJECTS.map((project) => {
           const body = (
             <>
-              <div className="wk-cover">
-                {project.caseStudy?.decisions && <span className="wk-badge">deep dive</span>}
-                <img src={project.cover} alt="" loading="lazy" />
-              </div>
+              {project.locked ? (
+                <div className="wk-cover wk-cover-locked">
+                  <span className="wk-badge wk-badge-muted">coming soon · under NDA</span>
+                  <div className="wk-cover-pair">
+                    {project.locked.images.map((src) => (
+                      <img key={src} src={src} alt="" loading="lazy" />
+                    ))}
+                  </div>
+                  <div className="wk-lock" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="4" y="11" width="16" height="10" rx="2" />
+                      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                    </svg>
+                    <span>Under NDA</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="wk-cover">
+                  {project.caseStudy?.decisions && <span className="wk-badge">deep dive</span>}
+                  <img src={project.cover} alt="" loading="lazy" />
+                </div>
+              )}
               <h2 className="wk-title">{project.title}</h2>
               <p className="wk-line">
                 {project.line}
@@ -48,7 +66,16 @@ export default function WorkIndexPage() {
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
-              {project.caseStudy ? (
+              {project.locked ? (
+                <a
+                  href={project.locked.cta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wk-cta wk-cta-contact"
+                >
+                  {project.locked.cta.label} <span aria-hidden="true">↗</span>
+                </a>
+              ) : project.caseStudy ? (
                 <span className="wk-cta">
                   View case study <span aria-hidden="true">→</span>
                 </span>

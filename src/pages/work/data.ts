@@ -65,6 +65,9 @@ export type WorkProject = {
   cover: string;
   // When set, the card links to /work/<id>; otherwise it says "coming soon".
   caseStudy?: CaseStudy;
+  // Work under NDA: no page, blurred cover images, and a contact CTA in
+  // place of "View case study".
+  locked?: { images: string[]; cta: { label: string; href: string } };
 };
 
 export const WORK_PROJECTS: WorkProject[] = [
@@ -206,6 +209,19 @@ export const WORK_PROJECTS: WorkProject[] = [
         "A design system had to hold up in both light and dark, not just look good in one.",
         "Motion icons, small details, but they're the first thing that makes an app feel alive.",
       ],
+    },
+  },
+  {
+    id: "mymuse",
+    title: "MyMuse",
+    line: "The app pairs via Bluetooth with app-enabled personal massagers from MyMuse, including models like Groove+, Dive+, Link+, and Loop+.",
+    tags: ["Coming soon", "Under NDA"],
+    cover: "/mymuse-1-blurred.png",
+    // Blurred site copies; the originals (public/MyMuse1.png, MyMuse2.png)
+    // stay unpublished while the project is under NDA.
+    locked: {
+      images: ["/mymuse-1-blurred.png", "/mymuse-2-blurred.png"],
+      cta: { label: "Contact me for a walkthrough", href: "https://cal.com/kshamanidhi-bhardwaj-tlecsq/30min" },
     },
   },
   {
