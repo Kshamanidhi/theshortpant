@@ -81,7 +81,7 @@ export const WORK_PROJECTS: WorkProject[] = [
       headline: "Three products, 40+ services, one consistent DIFC+ experience",
       tldr: {
         problem: "DIFC+ was growing into three products, and 40+ services had to feel like one app.",
-        did: "Built the design tokens and component library, the information architecture, and the high-fidelity UI for the DIFC+ dashboard and TenX.",
+        did: "Built the design tokens and component library, the information architecture, and the high-fidelity UI for the DIFC+ dashboard and Tenex.",
         result: "Client-approved and shipped: 3 pillars, 100+ screens each, on one system of 260+ tokens.",
       },
       facts: [
@@ -94,12 +94,12 @@ export const WORK_PROJECTS: WorkProject[] = [
       heroImage: "/wrk-difc-wrk1.png",
       overview: [
         "An all-in-one app for everyone inside DIFC, Dubai's financial district: employees, guests and students. They find services, get around and grab perks without switching between five different apps.",
-        "DIFC+ was expanding across three product areas at once: the core DIFC+ app, TenX, and property management.",
+        "DIFC+ was expanding across three product areas at once: the core DIFC+ app, Tenex, and property management.",
       ],
       ownership: [
         "Created the design tokens and component library from the DIFC brand guidelines.",
         "Developed the information architecture and wireframes, with reviews from Nitin.",
-        "Designed the high-fidelity UI for the DIFC+ dashboard and TenX.",
+        "Designed the high-fidelity UI for the DIFC+ dashboard and Tenex.",
         "Guided the junior UI designer through end-of-project bug fixes, alongside Nitin.",
         "Established the design foundation that was reused for Property Management.",
       ],
@@ -121,7 +121,7 @@ export const WORK_PROJECTS: WorkProject[] = [
         },
       ],
       problem: [
-        "DIFC+ was expanding across three product areas: the core DIFC+ app, TenX, and property management. The challenge was to translate business requirements and complex service workflows into a consistent, usable product experience.",
+        "DIFC+ was expanding across three product areas: the core DIFC+ app, Tenex, and property management. The challenge was to translate business requirements and complex service workflows into a consistent, usable product experience.",
         "I identified the key design challenges by reviewing the BRD and discussing requirements, technical constraints and product expectations with the Product Managers and CTO. Those conversations showed me the different user roles, the workflows each one needed, and how complex it would be to bring multiple services into one cohesive ecosystem.",
         "From there, the focus was on structuring the experience, designing the workflows, and establishing a reusable design system that could support the product as it expanded.",
       ],

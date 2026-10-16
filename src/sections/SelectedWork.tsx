@@ -46,7 +46,7 @@ type Project = {
 // Same order as the /work grid (src/pages/work/data.ts), DIFC pilot first.
 const PROJECTS: Project[] = [
   {
-    title: "Redesigned a LifeStyle App",
+    title: "Redesigned DIFC's Lifestyle App",
     workId: "difc",
     description:
       "One of Dubai's most ambitious lifestyle apps, redesigned from the ground up, then expanded into a property ecosystem.",
