@@ -79,6 +79,10 @@ export type WorkProject = {
     steps?: string[];
     files: { label: string; href: string }[];
     all?: { label: string; href: string };
+    // When set, the full box moves to the end of the "Read more" content and
+    // the collapsed slide shows just this one line plus the `all` link —
+    // keeps a tall box from pushing "Read more" below the fold on laptops.
+    teaser?: string;
   };
   // Optional — when missing (content not ready yet), the right side shows
   // two dashed placeholder frames instead of real screenshots.
@@ -190,6 +194,56 @@ export default function ProjectSlide({
   // either side of the 36rem text — full-width media may break out past the
   // text edges into it, while paragraphs keep their comfortable line
   // length. Any side asset rules it out: the media would run into it.
+  const downloadsBox = project.downloads ? (
+      <div className="bp-downloads">
+        <span style={{ fontSize: "0.875rem", color: "var(--color-accent)" }}>{project.downloads.heading}</span>
+        {project.downloads.note && (
+          <p style={{ margin: 0, fontSize: "0.8125rem", lineHeight: 1.5, color: "var(--color-muted)" }}>
+            {project.downloads.note}
+          </p>
+        )}
+        {project.downloads.steps && (
+          <ol
+            style={{
+              margin: "0.2rem 0 0.3rem",
+              paddingLeft: "1.2rem",
+              // Tailwind's preflight strips list markers — restore the numbers.
+              listStyle: "decimal",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.45rem",
+              fontSize: "0.8125rem",
+              lineHeight: 1.55,
+              color: "var(--color-fg)",
+            }}
+          >
+            {project.downloads.steps.map((step) => (
+              <li key={step}>{renderInline(step)}</li>
+            ))}
+          </ol>
+        )}
+        <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "0.4rem 1.25rem" }}>
+          {project.downloads.files.map((file) => (
+            <li key={file.href}>
+              <a href={file.href} download className="work-title-link" style={{ fontSize: "0.875rem" }}>
+                {file.label} <span aria-hidden="true">↓</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        {project.downloads.all && (
+          <a
+            href={project.downloads.all.href}
+            download
+            className="work-read-more"
+            style={{ alignSelf: "flex-start", textDecoration: "none", fontSize: "0.875rem" }}
+          >
+            {project.downloads.all.label} <span aria-hidden="true">↓</span>
+          </a>
+        )}
+      </div>
+  ) : null;
+
   const breakout = standalone && project.images === null && project.cardImage === null && !project.rightVideo;
   const sideStyle: React.CSSProperties = pinSides ? { position: "sticky", top: "28vh", alignSelf: "flex-start" } : {};
 
@@ -350,54 +404,14 @@ export default function ProjectSlide({
             {project.scope}
           </p>
 
-          {project.downloads && (
-            <div className="bp-downloads">
-              <span style={{ fontSize: "0.875rem", color: "var(--color-accent)" }}>{project.downloads.heading}</span>
-              {project.downloads.note && (
-                <p style={{ margin: 0, fontSize: "0.8125rem", lineHeight: 1.5, color: "var(--color-muted)" }}>
-                  {project.downloads.note}
-                </p>
-              )}
-              {project.downloads.steps && (
-                <ol
-                  style={{
-                    margin: "0.2rem 0 0.3rem",
-                    paddingLeft: "1.2rem",
-                    // Tailwind's preflight strips list markers — restore the numbers.
-                    listStyle: "decimal",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.45rem",
-                    fontSize: "0.8125rem",
-                    lineHeight: 1.55,
-                    color: "var(--color-fg)",
-                  }}
-                >
-                  {project.downloads.steps.map((step) => (
-                    <li key={step}>{renderInline(step)}</li>
-                  ))}
-                </ol>
-              )}
-              <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "0.4rem 1.25rem" }}>
-                {project.downloads.files.map((file) => (
-                  <li key={file.href}>
-                    <a href={file.href} download className="work-title-link" style={{ fontSize: "0.875rem" }}>
-                      {file.label} <span aria-hidden="true">↓</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {project.downloads.all && (
-                <a
-                  href={project.downloads.all.href}
-                  download
-                  className="work-read-more"
-                  style={{ alignSelf: "flex-start", textDecoration: "none", fontSize: "0.875rem" }}
-                >
-                  {project.downloads.all.label} <span aria-hidden="true">↓</span>
-                </a>
-              )}
-            </div>
+          {project.downloads && !project.downloads.teaser && downloadsBox}
+          {project.downloads?.teaser && project.downloads.all && !expanded && (
+            <p className="slide-dl-teaser">
+              {project.downloads.teaser}{" "}
+              <a href={project.downloads.all.href} download className="work-title-link">
+                {project.downloads.all.label} <span aria-hidden="true">↓</span>
+              </a>
+            </p>
           )}
 
           {expanded && project.readMoreNote && (
@@ -500,6 +514,8 @@ export default function ProjectSlide({
               )}
             </div>
           )}
+
+          {expanded && project.downloads?.teaser && <div className="pp-fade-up">{downloadsBox}</div>}
 
           <button type="button" onClick={onToggle} className="work-read-more" style={{ alignSelf: "flex-start" }}>
             {expanded ? "Read less" : "Read more"} <span aria-hidden="true">{expanded ? "←" : "→"}</span>

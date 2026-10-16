@@ -1647,3 +1647,18 @@ body {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
+
+/* Collapsed stand-in for a downloads box that opens with "Read more". */
+.slide-dl-teaser {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.slide-dl-teaser a {
+  color: var(--color-fg);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+

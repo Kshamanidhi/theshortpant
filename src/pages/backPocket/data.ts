@@ -439,6 +439,7 @@ export const BACK_POCKET_ITEMS: BackPocketItem[] = [
           { label: "Cross-Tier_Rules.md", href: "/Cross-Tier_Rules.md" },
         ],
         all: { label: "Download all 5 (.zip)", href: "/design-token-rules-v1.4.zip" },
+        teaser: "My token rules are free to download and try:",
       },
       learnings: [],
       // The finished Figma variables panel, in the left side slot like a
