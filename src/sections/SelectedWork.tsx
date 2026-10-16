@@ -259,6 +259,44 @@ function ScrollingWorkList({ reducedMotion }: { reducedMotion: boolean }) {
   );
 }
 
+// Phones: the projects as cards in a box that scrolls sideways, each with
+// the same cover as its /work grid card and a link to its case study.
+function MobileWorkCarousel() {
+  const { navigate } = useRouter();
+  return (
+    <div className="mw-box">
+      <div className="mw-scroller">
+        {PROJECTS.map((project) => {
+          const href = workHref(project.workId);
+          const cover = WORK_PROJECTS.find((p) => p.id === project.workId)?.cover;
+          return (
+            <a
+              key={project.workId}
+              href={href}
+              className="mw-card"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(href.split("#")[0]);
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              <div className="mw-cover">{cover && <img src={cover} alt="" loading="lazy" />}</div>
+              <h3 className="mw-title">{project.title}</h3>
+              <p className="mw-desc">{project.description}</p>
+              <span className="mw-cta">
+                View case study <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+      <p className="mw-hint" aria-hidden="true">
+        Swipe for more →
+      </p>
+    </div>
+  );
+}
+
 function StaticWorkList() {
   return (
     <div className="work-list">
@@ -290,7 +328,7 @@ export default function SelectedWork() {
 
   return (
     <>
-      <section id="work" style={{ padding: "8rem 2rem 0", maxWidth: "75rem", margin: "0 auto" }}>
+      <section id="work" className="work-heading" style={{ padding: "8rem 2rem 0", maxWidth: "75rem", margin: "0 auto" }}>
         <h2
           style={{
             margin: 0,
@@ -304,7 +342,11 @@ export default function SelectedWork() {
         </h2>
       </section>
 
-      {useStaticList ? (
+      {isMobile ? (
+        <div style={{ padding: "2rem 0 3rem" }}>
+          <MobileWorkCarousel />
+        </div>
+      ) : useStaticList ? (
         <div style={{ padding: "3rem 2rem 8rem", maxWidth: "75rem", margin: "0 auto" }}>
           <StaticWorkList />
         </div>

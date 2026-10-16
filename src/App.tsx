@@ -19,7 +19,6 @@ function HomePage({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   return (
     <>
       <Hero />
-      <p className="mobile-only-notice">Experience the site on desktop.</p>
       <div className="hide-on-mobile">
         <WhyICreate />
         <ThingsINotice />

@@ -107,6 +107,12 @@ export default function Hero() {
           Raipur, India
         </span>
       </div>
+      {/* Phones only: pinned to the bottom of the first screen, so it's seen
+          without scrolling. */}
+      <p className="mobile-only-notice">
+        Best experienced on desktop. Or just say hi:{" "}
+        <a href="mailto:kshamanidhikg@gmail.com">kshamanidhikg@gmail.com</a>
+      </p>
     </section>
   );
 }

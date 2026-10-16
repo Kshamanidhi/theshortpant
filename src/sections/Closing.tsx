@@ -28,6 +28,7 @@ export default function Closing() {
     <section
       ref={sectionRef}
       id="connect"
+      className="closing"
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -45,6 +46,7 @@ export default function Closing() {
         </div>
 
         <div
+          className="contact-row"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -56,12 +58,14 @@ export default function Closing() {
             href="https://docs.google.com/document/d/13rxQu4Je5JZznq2kB6ff_EffYY2_PGGrad7-5BUDPr0/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
+            className="contact-chip"
             style={{ color: "var(--color-fg)", textDecoration: "none" }}
           >
             Resume
           </a>
           <a
             href="mailto:kshamanidhikg@gmail.com"
+            className="contact-email"
             style={{ color: "var(--color-fg)", textDecoration: "none" }}
           >
             kshamanidhikg@gmail.com
@@ -70,6 +74,7 @@ export default function Closing() {
             href="https://www.linkedin.com/in/kshamanidhi/"
             target="_blank"
             rel="noopener noreferrer"
+            className="contact-chip"
             style={{ color: "var(--color-muted)", textDecoration: "none" }}
           >
             in
@@ -78,6 +83,7 @@ export default function Closing() {
             href="https://www.instagram.com/theshortpant/"
             target="_blank"
             rel="noopener noreferrer"
+            className="contact-chip"
             style={{ color: "var(--color-muted)", textDecoration: "none" }}
           >
             insta
