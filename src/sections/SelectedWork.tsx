@@ -43,17 +43,8 @@ type Project = {
 // Each image carries its own real pixel aspect ratio (applied inline,
 // overriding the shared CSS default) — screenshots come in at whatever
 // ratio they come in at, and forcing a generic one crops them.
+// Same order as the /work grid (src/pages/work/data.ts), DIFC pilot first.
 const PROJECTS: Project[] = [
-  {
-    title: "Vault2047",
-    workId: "vault2047",
-    description:
-      "A global ecosystem for conversations, collaboration, and innovation around cybersecurity and digital resilience.",
-    images: {
-      main: { src: "/wrk-vault1.png", aspect: "1456 / 948" },
-      secondary: { src: "/wrk-vault2.png", aspect: "360 / 743" },
-    },
-  },
   {
     title: "Redesigned a LifeStyle App",
     workId: "difc",
@@ -62,17 +53,6 @@ const PROJECTS: Project[] = [
     images: {
       main: { src: "/wrk-difc1.png", aspect: "589 / 352" },
       secondary: { src: "/wrk-difc2.png", aspect: "294 / 260" },
-    },
-  },
-  {
-    title: "Finance 2045, Global Finance & Fintech Summit",
-    workId: "finance2045",
-    description:
-      "Connecting global capital, financial leaders, and emerging technology to Indonesia's digital economy.",
-    images: {
-      main: { src: "/wrk-f451.png", aspect: "836 / 544" },
-      secondary: { src: "/wrk-f452.png", aspect: "339 / 599" },
-      accent: { src: "/wrk-f453.png", aspect: "360 / 628" },
     },
   },
   {
@@ -93,6 +73,27 @@ const PROJECTS: Project[] = [
         width: "62%",
         offset: { right: "-42%", bottom: "-12%" },
       },
+    },
+  },
+  {
+    title: "Vault2047",
+    workId: "vault2047",
+    description:
+      "A global ecosystem for conversations, collaboration, and innovation around cybersecurity and digital resilience.",
+    images: {
+      main: { src: "/wrk-vault1.png", aspect: "1456 / 948" },
+      secondary: { src: "/wrk-vault2.png", aspect: "360 / 743" },
+    },
+  },
+  {
+    title: "Finance 2045, Global Finance & Fintech Summit",
+    workId: "finance2045",
+    description:
+      "Connecting global capital, financial leaders, and emerging technology to Indonesia's digital economy.",
+    images: {
+      main: { src: "/wrk-f451.png", aspect: "836 / 544" },
+      secondary: { src: "/wrk-f452.png", aspect: "339 / 599" },
+      accent: { src: "/wrk-f453.png", aspect: "360 / 628" },
     },
   },
 ];
