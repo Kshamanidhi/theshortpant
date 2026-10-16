@@ -173,7 +173,12 @@ export const WORK_PROJECTS: WorkProject[] = [
       motion: {
         intro:
           "I also designed the motion icons for DIFC+ services. Small details, but they're the first thing that makes an app feel alive.",
-        icons: ["/home-major-ug-animation.json", "/city-lounge-animation.json"],
+        icons: [
+          "/home-major-ug-animation.json",
+          "/city-lounge-animation.json",
+          "/cinema-main-animation.json",
+          "/difc-lens-animation.json",
+        ],
       },
       outcome: {
         paragraphs: [
