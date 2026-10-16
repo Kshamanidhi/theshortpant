@@ -363,7 +363,7 @@ export const BACK_POCKET_ITEMS: BackPocketItem[] = [
         { src: "/figma-logo.svg", alt: "Figma" },
         { src: "/claude-logo.svg", alt: "Claude" },
       ],
-      description: "I design things for a living. I also, increasingly, direct AI to build things for a living. This is about the point where those two jobs overlapped in a way worth writing down: teaching an AI the actual rules of a design token system, and watching it build (and maintain) one, inside a real Figma file, at a scale no single person keeps consistent by hand for long.",
+      description: "I design for a living, and increasingly I direct AI to build. This is where the two met: teaching an AI the rules of a design token system, then watching it build and maintain one in a real Figma file, at a scale no one keeps consistent by hand.",
       scope: "If you're a designer who wants to try this yourself, this is the how. If you're trying to understand how I work, this is the thinking.",
       sections: [
         {
