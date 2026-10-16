@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "../lib/gsap";
 import { useRouter } from "../lib/router";
+import { WORK_PROJECTS } from "../pages/work/data";
+
+function workHref(id: string): string {
+  return WORK_PROJECTS.some((p) => p.id === id && p.caseStudy) ? `/work/${id}` : `/work#${id}`;
+}
 
 type ProjectImage = {
   src: string;
@@ -17,8 +22,8 @@ type ProjectImage = {
 };
 type Project = {
   title: string;
-  // Matches a project id in WorkPage.tsx's PROJECTS — the title links to
-  // that exact slide on /work rather than just the page in general.
+  // Matches a project id in src/pages/work/data.ts — the title opens that
+  // project's case study, or its card on the /work grid if it has none yet.
   workId: string;
   description: string;
   images?: {
@@ -51,7 +56,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "Redesigned a LifeStyle App",
-    workId: "lifestyle-app",
+    workId: "difc",
     description:
       "One of Dubai's most ambitious lifestyle apps, redesigned from the ground up, then expanded into a property ecosystem.",
     images: {
@@ -171,12 +176,14 @@ function ProjectContent({ project }: { project: Project }) {
           }}
         >
           <a
-            href={`/work#${project.workId}`}
+            href={workHref(project.workId)}
             className="work-title-link"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/work");
-              window.location.hash = project.workId;
+              const href = workHref(project.workId);
+              navigate(href.split("#")[0]);
+              if (href.includes("#")) window.location.hash = project.workId;
+              else window.scrollTo({ top: 0 });
             }}
           >
             {project.title}

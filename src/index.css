@@ -994,3 +994,530 @@ body {
     animation: none;
   }
 }
+
+/* ── Work grid (src/pages/work/WorkIndexPage.tsx) ─────────────────────── */
+.wk {
+  padding: 8rem 2rem 6rem;
+}
+
+.wk-head {
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.wk-head h1 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.wk-kicker {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.wk-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem 2.5rem;
+}
+
+.wk-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  color: var(--color-fg);
+  text-decoration: none;
+  scroll-margin-top: 7rem;
+}
+
+.wk-cover {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-border) 18%, var(--color-bg));
+  border: 1px solid var(--color-border);
+}
+
+.wk-cover img {
+  height: 92%;
+  width: auto;
+  max-width: none;
+  filter: drop-shadow(0 0.75rem 1.5rem rgba(0, 0, 0, 0.12));
+  transform: translateY(6%);
+  transition: transform 320ms cubic-bezier(.165, .84, .44, 1);
+}
+
+@media (hover: hover) {
+  .wk-card-link:hover .wk-cover img {
+    transform: translateY(2%) scale(1.02);
+  }
+
+  .wk-card-link:hover .wk-cta {
+    text-decoration: underline;
+  }
+}
+
+.wk-badge {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 1;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: var(--color-accent);
+  padding: 0.2rem 0.5rem;
+}
+
+.wk-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.wk-line {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.wk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wk-tags li {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.2rem 0.55rem;
+}
+
+.wk-cta {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+}
+
+.wk-cta-soon {
+  color: var(--color-muted);
+}
+
+/* Copy still to be written (todo() in src/pages/work/data.ts). */
+.todo-ph {
+  color: var(--color-muted);
+  border-bottom: 1px dashed var(--color-muted);
+}
+
+/* ── Case study (src/pages/work/CaseStudyPage.tsx) ────────────────────── */
+.cs {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 7rem 2rem 6rem;
+}
+
+.cs-back {
+  font-size: 0.9375rem;
+}
+
+.cs-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3rem;
+  align-items: center;
+  margin: 2rem 0 3.5rem;
+}
+
+.cs-hero h1 {
+  margin: 0.4rem 0 1rem;
+  font-size: clamp(1.8rem, 3.6vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.cs-hero-img {
+  height: 22rem;
+  width: auto;
+  max-width: none;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 0.75rem 1.5rem rgba(0, 0, 0, 0.14));
+}
+
+.cs-tldr {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+  padding: 0.2rem 0 0.2rem 1rem;
+  border-left: 3px solid var(--color-accent);
+}
+
+.cs-tldr p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cs-tldr b {
+  font-weight: normal;
+  color: var(--color-accent);
+  margin-right: 0.5rem;
+}
+
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  margin: 0 0 4rem;
+  border-top: 1px solid var(--color-fg);
+  border-bottom: 1px solid var(--color-fg);
+}
+
+.cs-facts > div {
+  padding: 0.9rem 1rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.cs-facts > div:last-child {
+  border-right: none;
+}
+
+.cs-facts dt {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-bottom: 0.3rem;
+}
+
+.cs-facts dd {
+  margin: 0;
+}
+
+.cs-body {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 44rem);
+  gap: 4rem;
+  justify-content: center;
+}
+
+.cs-toc {
+  position: sticky;
+  top: 7rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.875rem;
+}
+
+.cs-toc a {
+  color: var(--color-muted);
+  text-decoration: none;
+  padding-left: 0.8rem;
+  border-left: 2px solid transparent;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.cs-toc a:hover,
+.cs-toc a.on {
+  color: var(--color-fg);
+}
+
+.cs-toc a.on {
+  border-left-color: var(--color-accent);
+}
+
+.cs-main section {
+  scroll-margin-top: 6.5rem;
+  margin-bottom: 4rem;
+}
+
+.cs-main h2 {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.cs-main p {
+  margin: 0 0 0.9rem;
+  line-height: 1.65;
+}
+
+.cs-note {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+.cs-bullets {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-bullets li {
+  display: flex;
+  gap: 0.6rem;
+  line-height: 1.5;
+}
+
+.cs-bullets li::before {
+  content: "•";
+  color: var(--color-accent);
+}
+
+/* Decision cards — chosen / rejected toggle */
+.cs-decisions {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.dc {
+  border: 1px solid var(--color-fg);
+}
+
+.dc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 1.25rem 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dc-head h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: normal;
+}
+
+.dc-num {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.cs-main .dc-situation {
+  margin: 0;
+  padding: 1rem 1.25rem 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+.dc-seg {
+  display: inline-flex;
+  margin: 1rem 1.25rem 0;
+  border: 1px solid var(--color-fg);
+}
+
+.dc-seg button {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--color-fg);
+  background: none;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.dc-seg button[aria-selected="true"] {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+
+.dc-seg .dc-seg-rejected[aria-selected="true"] {
+  background: #b3261e;
+}
+
+/* Both panes share one grid cell, so flipping never changes the card's
+   height. The hidden one stays in the DOM (and the page source) but out of
+   sight — !important beats Tailwind's [hidden] { display: none !important }. */
+.dc-stage {
+  display: grid;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.dc-pane {
+  grid-area: 1 / 1;
+  display: grid !important;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  transition:
+    opacity 220ms cubic-bezier(.165, .84, .44, 1),
+    transform 220ms cubic-bezier(.165, .84, .44, 1);
+}
+
+.dc-pane[hidden] {
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dc-pane > img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+}
+
+.dc-pane h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+.dc-chosen h4 {
+  color: var(--color-accent);
+}
+
+.dc-rejected h4 {
+  color: #b3261e;
+}
+
+.cs-main .dc-pane p {
+  margin: 0 0 0.6rem;
+  line-height: 1.55;
+}
+
+.dc-why b {
+  font-weight: normal;
+  color: var(--color-muted);
+}
+
+.dc-stamp {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-size: 0.6875rem;
+  color: #b3261e;
+  border: 1.5px solid #b3261e;
+  padding: 0 0.35rem;
+  transform: rotate(-4deg);
+}
+
+.dc-img-ph {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border: 1px dashed var(--color-border);
+  background: color-mix(in srgb, var(--color-border) 18%, var(--color-bg));
+}
+
+/* Process: sketch → wireframe → final */
+.cs-process {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.cs-process figure {
+  margin: 0;
+}
+
+.cs-process-img {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-border) 18%, var(--color-bg));
+}
+
+.cs-process-img img {
+  height: 92%;
+  width: auto;
+}
+
+.cs-process figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+/* Outcome numbers */
+.cs-numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cs-numbers > div {
+  border-top: 2px solid var(--color-fg);
+  padding-top: 0.7rem;
+}
+
+.cs-numbers strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.cs-numbers span {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+.cs-next {
+  border-top: 1px solid var(--color-fg);
+  padding-top: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+/* Narrow screens: one column — grid cards stack, the case study drops the
+   side index and hero image, and decision panes put the image above. */
+@media (max-width: 1024px) {
+  .cs-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cs-toc {
+    display: none;
+  }
+
+  .cs-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .wk-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dc-pane {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dc-pane > img,
+  .dc-pane > .dc-img-ph {
+    max-width: 9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wk-cover img,
+  .cs-toc a,
+  .dc-seg button,
+  .dc-pane {
+    transition: none;
+  }
+}

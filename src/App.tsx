@@ -8,7 +8,8 @@ import ThingsINotice from "./sections/ThingsINotice";
 import SelectedWork from "./sections/SelectedWork";
 import CurrentlyExploring from "./sections/CurrentlyExploring";
 import Closing from "./sections/Closing";
-import WorkPage from "./pages/WorkPage";
+import WorkIndexPage from "./pages/work/WorkIndexPage";
+import CaseStudyPage from "./pages/work/CaseStudyPage";
 import BackPocketPage from "./pages/backPocket/BackPocketPage";
 import BackPocketItemPage from "./pages/backPocket/BackPocketItemPage";
 import { RouterProvider, useRouter } from "./lib/router";
@@ -39,9 +40,11 @@ function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
     document.title = pageTitle(path);
   }, [path]);
   const backPocketId = path.match(/^\/back-pocket\/([^/]+)\/?$/)?.[1];
+  const caseStudyId = path.match(/^\/work\/([^/]+)\/?$/)?.[1];
 
   let page;
-  if (path === "/work") page = <WorkPage />;
+  if (path === "/work" || path === "/work/") page = <WorkIndexPage />;
+  else if (caseStudyId) page = <CaseStudyPage key={caseStudyId} id={caseStudyId} />;
   else if (path === "/back-pocket" || path === "/back-pocket/") page = <BackPocketPage />;
   // Keyed by id so moving between two items starts the new one collapsed.
   else if (backPocketId) page = <BackPocketItemPage key={backPocketId} id={backPocketId} />;

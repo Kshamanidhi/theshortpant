@@ -3,6 +3,7 @@
 // and link previews) and the live app (keeps the tab title in step as you
 // navigate between pages).
 import { BACK_POCKET_ITEMS } from "../pages/backPocket/data";
+import { WORK_PROJECTS } from "../pages/work/data";
 
 export type PageMeta = {
   path: string;
@@ -39,8 +40,15 @@ export const PAGES: PageMeta[] = [
     file: "work.html",
     title: "Work · Kshamanidhi, Product Designer",
     description:
-      "Case studies by Kshamanidhi: Vault2047 and Finance 2045 summit sites, a lifestyle app redesign for DIFC, and Donaleb, an employee wellness and social impact platform.",
+      "Case studies by Kshamanidhi: a lifestyle app redesign for DIFC, Donaleb's employee wellness platform, and the Vault2047 and Finance 2045 summit sites.",
   },
+  ...WORK_PROJECTS.filter((p) => p.caseStudy).map((p) => ({
+    path: `/work/${p.id}`,
+    file: `work/${p.id}.html`,
+    title: `${p.title} · Kshamanidhi, Product Designer`,
+    description: clip(`${p.caseStudy!.headline}. ${p.line}`),
+    image: p.cover,
+  })),
   {
     path: "/back-pocket",
     file: "back-pocket.html",
