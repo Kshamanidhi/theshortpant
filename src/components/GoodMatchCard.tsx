@@ -55,7 +55,13 @@ export default function GoodMatchCard() {
       </div>
 
       <div className="gm-cta-row">
-        <a href="mailto:kshamanidhikg@gmail.com" className="gm-cta">
+        {/* Books a 30-minute intro call (Cal.com), in a new tab. */}
+        <a
+          href="https://cal.com/kshamanidhi-bhardwaj-tlecsq/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="gm-cta"
+        >
           Let's find out <span aria-hidden="true">→</span>
         </a>
       </div>
