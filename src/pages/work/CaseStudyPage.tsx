@@ -240,22 +240,40 @@ export default function CaseStudyPage({ id }: { id: string }) {
             <p>
               <T value={cs.process.intro} />
             </p>
-            <div className="cs-process">
+            {/* Column widths follow each image's aspect ratio, so the three
+                steps share one height whatever their shape. Each opens
+                full size, so wireframe detail stays readable. */}
+            <div
+              className="cs-process"
+              style={{ gridTemplateColumns: cs.process.steps.map((s) => `${s.aspect}fr`).join(" ") }}
+            >
               {cs.process.steps.map((step, i) => (
                 <figure key={step.label}>
-                  {step.image ? (
-                    <div className="cs-process-img">
-                      <img src={step.image} alt={step.label} loading="lazy" />
-                    </div>
-                  ) : (
-                    <div className="dc-img-ph cs-process-img">{step.label.toLowerCase()}</div>
-                  )}
+                  <a href={step.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
+                    <img src={step.image} alt={`${step.label}: ${step.caption}`} loading="lazy" />
+                  </a>
                   <figcaption>
                     {String(i + 1).padStart(2, "0")} · {step.label}
+                    <span>{step.caption}</span>
                   </figcaption>
                 </figure>
               ))}
             </div>
+            {cs.process.sketchbook && (
+              <>
+                <h3 className="cs-sub">More from the sketchbook</h3>
+                <div className="cs-sketchbook">
+                  {cs.process.sketchbook.map((sketch) => (
+                    <figure key={sketch.image}>
+                      <a href={sketch.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
+                        <img src={sketch.image} alt={`Sketch: ${sketch.caption}`} loading="lazy" />
+                      </a>
+                      <figcaption>{sketch.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </>
+            )}
           </section>
 
           <section id="outcome">

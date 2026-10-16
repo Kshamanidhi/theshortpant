@@ -30,7 +30,14 @@ export type CaseStudy = {
   problem: Text[];
   constraints: Text[];
   decisions: Decision[];
-  process: { intro: Text; steps: { label: string; image?: string }[] };
+  // One feature followed from paper to final. `aspect` (width / height)
+  // sizes each step so all three sit at the same height whatever their
+  // shape. `sketchbook` is an optional row of further sketches for range.
+  process: {
+    intro: Text;
+    steps: { label: string; caption: string; image: string; aspect: number }[];
+    sketchbook?: { caption: string; image: string }[];
+  };
   outcome: { paragraphs: Text[]; numbers: { value: Text; label: Text }[] };
   reflections: Text[];
 };
@@ -144,8 +151,18 @@ export const WORK_PROJECTS: WorkProject[] = [
         },
       ],
       process: {
-        intro: todo("A short line on how the work moved from idea to screen"),
-        steps: [{ label: "Sketch" }, { label: "Wireframe" }, { label: "Final", image: "/wrk-difc-wrk1.png" }],
+        intro:
+          "Each service started on paper, moved into wireframes that Nitin, the PMs and the CTO reviewed, then went to high fidelity on the design system. Here's one thread, co-working billing and payments, followed all the way through.",
+        steps: [
+          { label: "Sketch", caption: "Billing & payments, on paper", image: "/difc/process-sketch.jpg", aspect: 412 / 549 },
+          { label: "Wireframes", caption: "The pay, summary and receipt flows", image: "/difc/process-wireframes.png", aspect: 1174 / 916 },
+          { label: "Final", caption: "Payments on the co-working dashboard", image: "/difc/process-final.png", aspect: 204 / 426 },
+        ],
+        sketchbook: [
+          { caption: "EV charging stations", image: "/difc/sketch-ev-charging.jpg" },
+          { caption: "Valet parking", image: "/difc/sketch-valet.jpg" },
+          { caption: "Move-in request flow", image: "/difc/sketch-move-in.jpg" },
+        ],
       },
       outcome: {
         paragraphs: [

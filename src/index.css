@@ -1420,37 +1420,49 @@ body {
   background: color-mix(in srgb, var(--color-border) 18%, var(--color-bg));
 }
 
-/* Process: sketch → wireframe → final */
+/* Process: sketch → wireframe → final. Column widths are set inline from
+   each image's aspect ratio, so the row shares one height. */
 .cs-process {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+  align-items: start;
   margin-top: 1.25rem;
 }
 
-.cs-process figure {
+.cs-process figure,
+.cs-sketchbook figure {
   margin: 0;
 }
 
-.cs-process-img {
-  aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.cs-zoom {
+  display: block;
   border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-border) 18%, var(--color-bg));
+  cursor: zoom-in;
 }
 
-.cs-process-img img {
-  height: 92%;
-  width: auto;
+.cs-zoom img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.cs-process figcaption {
+.cs-process figcaption,
+.cs-sketchbook figcaption {
   margin-top: 0.5rem;
   font-size: 0.8125rem;
   color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.cs-process figcaption span {
+  display: block;
+  color: var(--color-fg);
+}
+
+.cs-sketchbook {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 /* Outcome numbers */
@@ -1512,6 +1524,16 @@ body {
   .dc-pane > img,
   .dc-pane > .dc-img-ph {
     max-width: 12rem;
+  }
+
+  /* Proportional columns get too narrow on a phone: stack the steps.
+     !important beats the inline aspect-ratio columns. */
+  .cs-process {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .cs-process figure:last-child .cs-zoom {
+    max-width: 14rem;
   }
 }
 
