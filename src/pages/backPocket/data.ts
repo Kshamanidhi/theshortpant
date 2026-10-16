@@ -354,7 +354,7 @@ export const BACK_POCKET_ITEMS: BackPocketItem[] = [
       id: "figma-token-guide",
       logoLabel: "TOKEN GUIDE",
       logoImage: null,
-      title: "A Practical Guide to Automating Design Tokens with AI (Without Losing Control of the System)",
+      title: "A Practical Guide to Automating Design Tokens with AI",
       logos: [
         { src: "/figma-logo.svg", alt: "Figma" },
         { src: "/claude-logo.svg", alt: "Claude" },
