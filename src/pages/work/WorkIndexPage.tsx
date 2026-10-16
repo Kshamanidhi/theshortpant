@@ -30,7 +30,7 @@ export default function WorkIndexPage() {
           const body = (
             <>
               <div className="wk-cover">
-                {project.caseStudy && <span className="wk-badge">case study</span>}
+                {project.caseStudy?.decisions && <span className="wk-badge">deep dive</span>}
                 <img src={project.cover} alt="" loading="lazy" />
               </div>
               <h2 className="wk-title">{project.title}</h2>

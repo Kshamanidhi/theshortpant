@@ -17,33 +17,42 @@ export type Decision = {
   rejected: { text: Text; whyNot: Text; image?: string };
 };
 
+// Only the top section (logo, headline, TL;DR, facts, hero image) and
+// Overview are required. Every other section is optional and appears, in
+// the page and in its "on this page" index, only when filled in.
 export type CaseStudy = {
   // Client brandmark above the headline.
   logo?: { src: string; alt: string };
   headline: string;
-  tldr: { problem: Text; did: Text; result: Text };
+  // Result is optional: left out when there's no outcome to state yet.
+  tldr: { problem: Text; did: Text; result?: Text };
+  // Optional live link, shown under the TL;DR.
+  link?: { href: string; label: string };
   // The facts strip under the hero (role, client, timeline…).
   facts: { label: string; value: Text }[];
   heroImage: string;
   overview: Text[];
   // Shown in Overview: what I personally did, then everyone else's part.
-  ownership: Text[];
-  team: { who: string; role: string; did: Text }[];
-  problem: Text[];
-  constraints: Text[];
-  decisions: Decision[];
+  ownership?: Text[];
+  team?: { who: string; role: string; did: Text }[];
+  problem?: Text[];
+  constraints?: Text[];
+  decisions?: Decision[];
   // One feature followed from paper to final. `aspect` (width / height)
   // sizes each step so all three sit at the same height whatever their
   // shape. `sketchbook` is an optional row of further sketches for range.
-  process: {
+  process?: {
     intro: Text;
     steps: { label: string; caption: string; image: string; aspect: number }[];
     sketchbook?: { caption: string; image: string }[];
   };
+  // Finished screens (cut-out mockups or a screen recording), one row at a
+  // shared height, sized by aspect like the process steps.
+  screens?: { image?: string; video?: string; aspect: number; alt: string }[];
   // Optional: looping Lottie icons shown in their own small section.
   motion?: { intro: Text; icons: string[] };
-  outcome: { paragraphs: Text[]; numbers: { value: Text; label: Text }[] };
-  reflections: Text[];
+  outcome?: { paragraphs: Text[]; numbers: { value: Text; label: Text }[] };
+  reflections?: Text[];
 };
 
 export type WorkProject = {
@@ -205,6 +214,39 @@ export const WORK_PROJECTS: WorkProject[] = [
     line: "A fitness app that turns employees' steps into real donations for causes their company supports.",
     tags: ["Product designer", "Mobile · Admin web", "Oct 23", "Freelance"],
     cover: "/wrk-dona02.png",
+    // Copy from the original /work slides.
+    caseStudy: {
+      logo: { src: "/logo-donaleb.png", alt: "Donaleb" },
+      headline: "Turning steps into donations, without making fitness feel like a contest",
+      tldr: {
+        problem: "Fitness, competition and charity: three different motivations, one app to hold them all.",
+        did: "Redesigned the app as product designer: contests, leaderboards, donations, badges and the admin dashboard, plus the splash screen and character animation.",
+      },
+      link: { href: "https://www.donaleb.com/", label: "Visit donaleb.com" },
+      facts: [
+        { label: "Role", value: "Product designer" },
+        { label: "Client", value: "Yasmine Darwich" },
+        { label: "Engagement", value: "Freelance" },
+        { label: "Timeline", value: "Oct 23" },
+        { label: "Platform", value: "Mobile · Admin web" },
+      ],
+      heroImage: "/wrk-dona02.png",
+      overview: [
+        "A fitness app for companies: employees log steps and activity, compete on leaderboards, unlock badges, and turn their progress into real donations for causes the company supports.",
+      ],
+      screens: [
+        { image: "/wrk-dona01.png", aspect: 444 / 949, alt: "Donaleb challenge progress screen" },
+        { video: "/DonaLeb_Reel_01_1.mp4", aspect: 1080 / 1920, alt: "Donaleb app walkthrough" },
+        { image: "/wrk-dona03.png", aspect: 444 / 947, alt: "Donaleb app screen" },
+      ],
+      reflections: [
+        "Fitness, competition, and charity: three different motivations, one app to hold them all.",
+        "A leaderboard has to feel fun, not stressful, for people who aren't naturally competitive.",
+        "Progress badges, small reward, but had to actually feel earned.",
+        "A splash screen is three seconds, tops, still had to make a character feel alive in that window.",
+        "An admin dashboard is a completely different user than the employee using the app, same product, two very different jobs to design for.",
+      ],
+    },
   },
   {
     id: "vault2047",
@@ -212,6 +254,36 @@ export const WORK_PROJECTS: WorkProject[] = [
     line: "The site and digital experience for a cyber-defence summit in Mumbai.",
     tags: ["Web designer", "Web", "Mar – May 26", "Trescon · Wormit"],
     cover: "/wrk-v-wrk2.png",
+    // Copy from the original /work slides.
+    caseStudy: {
+      logo: { src: "/logo-vault.png", alt: "Vault2047" },
+      headline: "A credible, findable home for a cyber-defence summit",
+      tldr: {
+        problem: "Policymakers, CISOs, founders and investors all came to one site for tickets, speakers and a dense agenda.",
+        did: "I built the website and the whole digital experience for the summit, staying inside their brand's rules the whole way.",
+      },
+      facts: [
+        { label: "Role", value: "Web designer" },
+        { label: "Client", value: "Trescon" },
+        { label: "Agency", value: "Wormit" },
+        { label: "Timeline", value: "Mar – May 26" },
+        { label: "Platform", value: "Web" },
+      ],
+      heroImage: "/wrk-v-wrk2.png",
+      overview: [
+        "A summit in Mumbai for everyone working on cyber defense: policymakers, CISOs, founders, and investors, all in one place. Tickets, speakers, the full agenda, all running through this site.",
+      ],
+      screens: [
+        { image: "/wrk-vault1.png", aspect: 1456 / 948, alt: "Vault2047 website on desktop" },
+        { image: "/wrk-vault2.png", aspect: 360 / 743, alt: "Vault2047 website on mobile" },
+      ],
+      reflections: [
+        "Had to make this feel credible, not stiff.",
+        "So much event info, had to make it findable.",
+        "Plugged in a ticketing system I didn't build, made it feel like mine.",
+        "One page, six kinds of people, all wanting something different from it.",
+      ],
+    },
   },
   {
     id: "finance2045",
@@ -219,5 +291,35 @@ export const WORK_PROJECTS: WorkProject[] = [
     line: "A fintech summit site for Jakarta, built inside a locked brand system.",
     tags: ["Web designer", "Web", "May – Jun 26", "Trescon · Wormit"],
     cover: "/wrk-f453.png",
+    // Copy from the original /work slides.
+    caseStudy: {
+      logo: { src: "/logo-finance.png", alt: "Finance 2045" },
+      headline: "Giving ten themes room to breathe on one summit site",
+      tldr: {
+        problem: "Ten themes, a long speaker list, and visitors from regulators to investors, all on one page.",
+        did: "I built the website and the digital experience for this summit, working inside a brand system that was already locked in.",
+      },
+      facts: [
+        { label: "Role", value: "Web designer" },
+        { label: "Client", value: "Trescon" },
+        { label: "Agency", value: "Wormit" },
+        { label: "Timeline", value: "May – Jun 26" },
+        { label: "Platform", value: "Web" },
+      ],
+      heroImage: "/wrk-f453.png",
+      overview: [
+        "A finance summit in Jakarta, bringing CFOs, regulators, central bankers, and fintech founders together to figure out where Indonesia's financial system is headed next. Same setup as Vault, tickets, speakers, agenda, themes, all through this site.",
+      ],
+      screens: [
+        { image: "/wrk-f451.png", aspect: 836 / 544, alt: "Finance 2045 website on desktop" },
+        { image: "/wrk-f452.png", aspect: 339 / 599, alt: "Finance 2045 website on mobile" },
+      ],
+      reflections: [
+        "Ten themes competing for the same page, had to give each one room to breathe.",
+        "A speaker list this long, had to stay scannable, not a wall of names.",
+        "Big numbers doing the selling here, had to make them land without sounding like a pitch deck.",
+        "One page, pulling double duty for a regulator and an investor at the same time.",
+      ],
+    },
   },
 ];

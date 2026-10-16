@@ -11,6 +11,7 @@ const SECTIONS = [
   ["constraints", "Constraints"],
   ["decisions", "Key decisions"],
   ["process", "Process"],
+  ["screens", "Screens"],
   ["motion", "Motion icons"],
   ["outcome", "Outcome"],
   ["reflections", "Reflections"],
@@ -140,6 +141,19 @@ export default function CaseStudyPage({ id }: { id: string }) {
 
   if (!project?.caseStudy) return null;
   const cs = project.caseStudy;
+  // Which optional sections this case study fills in — drives both the
+  // page body and the "on this page" index.
+  const has: Record<string, boolean> = {
+    overview: true,
+    problem: !!cs.problem?.length,
+    constraints: !!cs.constraints?.length,
+    decisions: !!cs.decisions?.length,
+    process: !!cs.process,
+    screens: !!cs.screens?.length,
+    motion: !!cs.motion,
+    outcome: !!cs.outcome,
+    reflections: !!cs.reflections?.length,
+  };
 
   return (
     <div className="cs">
@@ -169,11 +183,18 @@ export default function CaseStudyPage({ id }: { id: string }) {
               <b>What I did</b>
               <T value={cs.tldr.did} />
             </p>
-            <p>
-              <b>Result</b>
-              <T value={cs.tldr.result} />
-            </p>
+            {cs.tldr.result && (
+              <p>
+                <b>Result</b>
+                <T value={cs.tldr.result} />
+              </p>
+            )}
           </div>
+          {cs.link && (
+            <a href={cs.link.href} target="_blank" rel="noopener noreferrer" className="cs-live work-title-link">
+              {cs.link.label} <span aria-hidden="true">↗</span>
+            </a>
+          )}
         </div>
         <img className="cs-hero-img hide-on-mobile" src={cs.heroImage} alt="" />
       </header>
@@ -191,7 +212,7 @@ export default function CaseStudyPage({ id }: { id: string }) {
 
       <div className="cs-body">
         <nav className="cs-toc" aria-label="On this page">
-          {SECTIONS.filter(([sid]) => sid !== "motion" || cs.motion).map(([sid, label]) => (
+          {SECTIONS.filter(([sid]) => has[sid]).map(([sid, label]) => (
             <a key={sid} href={`#${sid}`} className={active === sid ? "on" : undefined}>
               {label}
             </a>
@@ -202,83 +223,119 @@ export default function CaseStudyPage({ id }: { id: string }) {
           <section id="overview">
             <h2>Overview</h2>
             <Paragraphs items={cs.overview} />
-            <h3 className="cs-sub">What I owned</h3>
-            <Bullets items={cs.ownership} />
-            <h3 className="cs-sub">Who else was involved</h3>
-            <dl className="cs-team">
-              {cs.team.map((member) => (
-                <div key={member.who}>
-                  <dt>
-                    {member.who} <span>· {member.role}</span>
-                  </dt>
-                  <dd>
-                    <T value={member.did} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-
-          <section id="problem">
-            <h2>Problem</h2>
-            <Paragraphs items={cs.problem} />
-          </section>
-
-          <section id="constraints">
-            <h2>Constraints</h2>
-            <Bullets items={cs.constraints} />
-          </section>
-
-          <section id="decisions">
-            <h2>Key decisions</h2>
-            <p className="cs-note">Each card shows what I chose. Flip it to see the option I rejected, and why.</p>
-            <div className="cs-decisions">
-              {cs.decisions.map((decision, i) => (
-                <DecisionCard key={i} decision={decision} index={i} />
-              ))}
-            </div>
-          </section>
-
-          <section id="process">
-            <h2>Process</h2>
-            <p>
-              <T value={cs.process.intro} />
-            </p>
-            {/* Column widths follow each image's aspect ratio, so the three
-                steps share one height whatever their shape. Each opens
-                full size, so wireframe detail stays readable. */}
-            <div
-              className="cs-process"
-              style={{ gridTemplateColumns: cs.process.steps.map((s) => `${s.aspect}fr`).join(" ") }}
-            >
-              {cs.process.steps.map((step, i) => (
-                <figure key={step.label}>
-                  <a href={step.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
-                    <img src={step.image} alt={`${step.label}: ${step.caption}`} loading="lazy" />
-                  </a>
-                  <figcaption>
-                    {String(i + 1).padStart(2, "0")} · {step.label}
-                    <span>{step.caption}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-            {cs.process.sketchbook && (
+            {cs.ownership && (
               <>
-                <h3 className="cs-sub">More from the sketchbook</h3>
-                <div className="cs-sketchbook">
-                  {cs.process.sketchbook.map((sketch) => (
-                    <figure key={sketch.image}>
-                      <a href={sketch.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
-                        <img src={sketch.image} alt={`Sketch: ${sketch.caption}`} loading="lazy" />
-                      </a>
-                      <figcaption>{sketch.caption}</figcaption>
-                    </figure>
+                <h3 className="cs-sub">What I owned</h3>
+                <Bullets items={cs.ownership} />
+              </>
+            )}
+            {cs.team && (
+              <>
+                <h3 className="cs-sub">Who else was involved</h3>
+                <dl className="cs-team">
+                  {cs.team.map((member) => (
+                    <div key={member.who}>
+                      <dt>
+                        {member.who} <span>· {member.role}</span>
+                      </dt>
+                      <dd>
+                        <T value={member.did} />
+                      </dd>
+                    </div>
                   ))}
-                </div>
+                </dl>
               </>
             )}
           </section>
+
+          {cs.problem && (
+            <section id="problem">
+              <h2>Problem</h2>
+              <Paragraphs items={cs.problem} />
+            </section>
+          )}
+
+          {cs.constraints && (
+            <section id="constraints">
+              <h2>Constraints</h2>
+              <Bullets items={cs.constraints} />
+            </section>
+          )}
+
+          {cs.decisions && (
+            <section id="decisions">
+              <h2>Key decisions</h2>
+              <p className="cs-note">Each card shows what I chose. Flip it to see the option I rejected, and why.</p>
+              <div className="cs-decisions">
+                {cs.decisions.map((decision, i) => (
+                  <DecisionCard key={i} decision={decision} index={i} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {cs.process && (
+            <section id="process">
+              <h2>Process</h2>
+              <p>
+                <T value={cs.process.intro} />
+              </p>
+              {/* Column widths follow each image's aspect ratio, so the three
+                  steps share one height whatever their shape. Each opens
+                  full size, so wireframe detail stays readable. */}
+              <div
+                className="cs-process"
+                style={{ gridTemplateColumns: cs.process.steps.map((s) => `${s.aspect}fr`).join(" ") }}
+              >
+                {cs.process.steps.map((step, i) => (
+                  <figure key={step.label}>
+                    <a href={step.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
+                      <img src={step.image} alt={`${step.label}: ${step.caption}`} loading="lazy" />
+                    </a>
+                    <figcaption>
+                      {String(i + 1).padStart(2, "0")} · {step.label}
+                      <span>{step.caption}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+              {cs.process.sketchbook && (
+                <>
+                  <h3 className="cs-sub">More from the sketchbook</h3>
+                  <div className="cs-sketchbook">
+                    {cs.process.sketchbook.map((sketch) => (
+                      <figure key={sketch.image}>
+                        <a href={sketch.image} target="_blank" rel="noopener noreferrer" className="cs-zoom">
+                          <img src={sketch.image} alt={`Sketch: ${sketch.caption}`} loading="lazy" />
+                        </a>
+                        <figcaption>{sketch.caption}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </>
+              )}
+            </section>
+          )}
+
+          {cs.screens && (
+            <section id="screens">
+              <h2>Screens</h2>
+              {/* One row at a shared height: column widths follow each
+                  screen's aspect ratio, like the process strip. */}
+              <div
+                className="cs-screens"
+                style={{ gridTemplateColumns: cs.screens.map((sc) => `${sc.aspect}fr`).join(" ") }}
+              >
+                {cs.screens.map((sc) =>
+                  sc.video ? (
+                    <video key={sc.video} src={sc.video} autoPlay loop muted playsInline aria-label={sc.alt} />
+                  ) : (
+                    <img key={sc.image} src={sc.image} alt={sc.alt} loading="lazy" />
+                  ),
+                )}
+              </div>
+            </section>
+          )}
 
           {cs.motion && (
             <section id="motion">
@@ -302,27 +359,31 @@ export default function CaseStudyPage({ id }: { id: string }) {
             </section>
           )}
 
-          <section id="outcome">
-            <h2>Outcome</h2>
-            <Paragraphs items={cs.outcome.paragraphs} />
-            <div className="cs-numbers">
-              {cs.outcome.numbers.map((n, i) => (
-                <div key={i}>
-                  <strong>
-                    <T value={n.value} />
-                  </strong>
-                  <span>
-                    <T value={n.label} />
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
+          {cs.outcome && (
+            <section id="outcome">
+              <h2>Outcome</h2>
+              <Paragraphs items={cs.outcome.paragraphs} />
+              <div className="cs-numbers">
+                {cs.outcome.numbers.map((n, i) => (
+                  <div key={i}>
+                    <strong>
+                      <T value={n.value} />
+                    </strong>
+                    <span>
+                      <T value={n.label} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-          <section id="reflections">
-            <h2>Reflections</h2>
-            <Bullets items={cs.reflections} />
-          </section>
+          {cs.reflections && (
+            <section id="reflections">
+              <h2>Reflections</h2>
+              <Bullets items={cs.reflections} />
+            </section>
+          )}
 
           <div className="cs-next">
             <a
