@@ -112,10 +112,20 @@ export const WORK_PROJECTS: WorkProject[] = [
       ],
       decisions: [
         {
-          title: todo("Decision title, e.g. how the home screen serves three audiences"),
-          situation: todo("The situation that forced the decision"),
-          chosen: { text: todo("What you went with, in one or two lines"), why: todo("Why, plus any number that backed it") },
-          rejected: { text: todo("The alternative you explored"), whyNot: todo("What was wrong with it") },
+          title: "Previewing uploaded documents",
+          situation:
+            "The property flow asked users to upload a long list of documents: unit plan, DEWA and EMPOWER activation proofs, Emirates ID, passport copy. With that many, it's easy to lose track of what's been uploaded, and whether it's the right file.",
+          chosen: {
+            text: "A smart accordion for each document type that opens to a large preview of the uploaded file.",
+            why: "In a process this long, seeing the actual document is what removes the doubt. The accordion keeps the page short, but one tap shows enough of the file to confirm it's the right one.",
+            // Site copy with the passport scan blurred; the original is public/Decision 01 - A.png.
+            image: "/difc/decision-01-chosen.png",
+          },
+          rejected: {
+            text: "A document list with a small file thumbnail next to each upload.",
+            whyNot: "The thumbnails were too small to tell whether the right document had been uploaded, which brought back exactly the confusion the page was meant to remove.",
+            image: "/difc/decision-01-rejected.png",
+          },
         },
         {
           title: todo("Decision title, e.g. one token set for light and dark"),

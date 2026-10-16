@@ -1348,7 +1348,8 @@ body {
 .dc-pane {
   grid-area: 1 / 1;
   display: grid !important;
-  grid-template-columns: 9rem minmax(0, 1fr);
+  /* Wide enough that a phone screenshot's detail (e.g. thumbnail size) reads. */
+  grid-template-columns: 12rem minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start;
   transition:
@@ -1510,7 +1511,7 @@ body {
 
   .dc-pane > img,
   .dc-pane > .dc-img-ph {
-    max-width: 9rem;
+    max-width: 12rem;
   }
 }
 
