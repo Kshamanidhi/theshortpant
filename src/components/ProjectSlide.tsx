@@ -54,6 +54,9 @@ export type WorkProject = {
   // An image entry is either a plain src (full column width) or an object
   // with its own display width (e.g. a small UI crop kept near native size
   // so it stays sharp) and an optional caption.
+  // A short note shown first when the content expands (e.g. how it was
+  // written), ending in a link. Supports **bold** like section copy.
+  readMoreNote?: { text: string; link: { label: string; href: string } };
   sections?: {
     heading: string;
     paragraphs: string[];
@@ -395,6 +398,16 @@ export default function ProjectSlide({
                 </a>
               )}
             </div>
+          )}
+
+          {expanded && project.readMoreNote && (
+            <p className="pp-fade-up slide-note">
+              {renderInline(project.readMoreNote.text)}{" "}
+              <a href={project.readMoreNote.link.href} className="work-title-link">
+                {project.readMoreNote.link.label}
+              </a>
+              .
+            </p>
           )}
 
           {expanded &&

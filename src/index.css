@@ -1630,3 +1630,20 @@ body {
   font-size: 0.9375rem;
   line-height: 1.55;
 }
+
+/* Note shown first when a slide's "Read more" opens (ProjectSlide
+   readMoreNote) — set apart from the article text that follows. */
+.slide-note {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg));
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-fg);
+}
+
+.slide-note a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}

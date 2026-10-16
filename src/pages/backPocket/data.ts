@@ -355,6 +355,10 @@ export const BACK_POCKET_ITEMS: BackPocketItem[] = [
       logoLabel: "TOKEN GUIDE",
       logoImage: null,
       title: "A Practical Guide to Automating Design Tokens with AI",
+      readMoreNote: {
+        text: "**Heads up:** I wrote this with the help of AI. If you'd like it explained more simply, just drop me a mail at",
+        link: { label: "kshamanidhikg@gmail.com", href: "mailto:kshamanidhikg@gmail.com" },
+      },
       logos: [
         { src: "/figma-logo.svg", alt: "Figma" },
         { src: "/claude-logo.svg", alt: "Claude" },
