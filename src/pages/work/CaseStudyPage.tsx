@@ -40,7 +40,9 @@ function Bullets({ items }: { items: Text[] }) {
 // Shows what was chosen; the toggle swaps in the rejected option and why it
 // lost. Both panes stay in the DOM (one hidden) so the rejected reasoning is
 // in the page source for search engines too, and the card never changes
-// height when flipped — the two panes share one grid cell.
+// height when flipped — the two panes share one grid cell. (Images load
+// eagerly: a lazy hidden-side image would only load on flip and resize the
+// card then.)
 function DecisionCard({ decision, index }: { decision: Decision; index: number }) {
   const [side, setSide] = useState<"chosen" | "rejected">("chosen");
   const num = String(index + 1).padStart(2, "0");
@@ -73,7 +75,7 @@ function DecisionCard({ decision, index }: { decision: Decision; index: number }
       <div className="dc-stage">
         <div className="dc-pane dc-chosen" hidden={side !== "chosen"}>
           {decision.chosen.image ? (
-            <img src={decision.chosen.image} alt="" loading="lazy" />
+            <img src={decision.chosen.image} alt="" />
           ) : (
             <div className="dc-img-ph">final screen</div>
           )}
@@ -89,7 +91,7 @@ function DecisionCard({ decision, index }: { decision: Decision; index: number }
         </div>
         <div className="dc-pane dc-rejected" hidden={side !== "rejected"}>
           {decision.rejected.image ? (
-            <img src={decision.rejected.image} alt="" loading="lazy" />
+            <img src={decision.rejected.image} alt="" />
           ) : (
             <div className="dc-img-ph">rejected option</div>
           )}

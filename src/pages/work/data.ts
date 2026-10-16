@@ -128,10 +128,19 @@ export const WORK_PROJECTS: WorkProject[] = [
           },
         },
         {
-          title: todo("Decision title, e.g. one token set for light and dark"),
-          situation: todo("The situation that forced the decision"),
-          chosen: { text: todo("What you went with"), why: todo("Why") },
-          rejected: { text: todo("The alternative you explored"), whyNot: todo("What was wrong with it") },
+          title: "Moving around the co-working dashboard",
+          situation:
+            "Co-working is one service inside DIFC+, with its own dashboard for bookings, payments and tickets. Members move between these constantly, and the app already has a main dashboard above it.",
+          chosen: {
+            text: "One co-working space with a tab bar (Dashboard, Bookings, Payment, Tickets) that members can tap or swipe between.",
+            why: "Everything stays inside a single interface, and you always see where you are. The flow feels connected, and there's less to hold in your head.",
+            image: "/difc/decision-02-chosen.png",
+          },
+          rejected: {
+            text: "A quick-access grid of icons, each redirecting to its own separate page.",
+            whyNot: "Jumping out to independent pages felt broken rather than connected. With the main DIFC+ dashboard already above it, a second dashboard of redirects would have interrupted the flow and added to the cognitive load.",
+            image: "/difc/decision-02-rejected.png",
+          },
         },
       ],
       process: {
