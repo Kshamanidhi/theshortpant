@@ -1718,12 +1718,12 @@ body {
   text-underline-offset: 0.15em;
 }
 
-/* Homepage Work on phones (SelectedWork MobileWorkCarousel): cards in a box
-   that scrolls sideways, snapping one card at a time. */
+/* Homepage Work on phones (SelectedWork MobileWorkCarousel): a row of cards
+   that scrolls sideways edge to edge, snapping one card at a time. No outer
+   box — the first card lines up with the page margin and the next one runs
+   off the right edge, which is what signals the swipe. */
 .mw-box {
-  margin: 0 1.25rem;
-  padding: 1rem 0 0.75rem;
-  border: 1px solid var(--color-border);
+  margin: 0;
 }
 
 .mw-scroller {
@@ -1731,8 +1731,10 @@ body {
   gap: 0.9rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 1rem 0.75rem;
-  scroll-padding: 0 1rem;
+  padding: 0 1.25rem 0.75rem;
+  scroll-padding: 0 1.25rem;
+  /* Hide the scrollbar; the peeking card and the hint carry the cue. */
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1787,9 +1789,13 @@ body {
   color: var(--color-accent);
 }
 
+.mw-scroller::-webkit-scrollbar {
+  display: none;
+}
+
 .mw-hint {
   margin: 0;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
   text-align: right;
   font-size: 0.75rem;
   color: var(--color-muted);
