@@ -154,6 +154,7 @@ export default function CaseStudyPage({ id }: { id: string }) {
 
       <header className="cs-hero">
         <div>
+          {cs.logo && <img className="cs-logo" src={cs.logo.src} alt={cs.logo.alt} />}
           <span className="wk-kicker">case study · {project.title.toLowerCase()}</span>
           <h1>{cs.headline}</h1>
           <div className="cs-tldr">

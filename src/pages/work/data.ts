@@ -18,6 +18,8 @@ export type Decision = {
 };
 
 export type CaseStudy = {
+  // Client brandmark above the headline.
+  logo?: { src: string; alt: string };
   headline: string;
   tldr: { problem: Text; did: Text; result: Text };
   // The facts strip under the hero (role, client, timeline…).
@@ -63,6 +65,8 @@ export const WORK_PROJECTS: WorkProject[] = [
     tags: ["Product & motion designer", "iOS · Android", "Apr 25 – Jun 26", "DIFC · Magure"],
     cover: "/wrk-difc-wrk1.png",
     caseStudy: {
+      // Recoloured to the site's ink colour from public/DIFC Brandmark.svg (white).
+      logo: { src: "/difc/difc-brandmark.svg", alt: "DIFC" },
       headline: "Three products, 40+ services, one consistent DIFC+ experience",
       tldr: {
         problem: "DIFC+ was growing into three products, and 40+ services had to feel like one app.",
