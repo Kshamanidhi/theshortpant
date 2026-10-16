@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { LOTTIE_RENDER_CONFIG } from "../../components/ProjectSlide";
 import { useRouter } from "../../lib/router";
 import { WORK_PROJECTS, type Decision, type Text } from "./data";
 import { T } from "./WorkIndexPage";
@@ -9,6 +11,7 @@ const SECTIONS = [
   ["constraints", "Constraints"],
   ["decisions", "Key decisions"],
   ["process", "Process"],
+  ["motion", "Motion icons"],
   ["outcome", "Outcome"],
   ["reflections", "Reflections"],
 ] as const;
@@ -188,7 +191,7 @@ export default function CaseStudyPage({ id }: { id: string }) {
 
       <div className="cs-body">
         <nav className="cs-toc" aria-label="On this page">
-          {SECTIONS.map(([sid, label]) => (
+          {SECTIONS.filter(([sid]) => sid !== "motion" || cs.motion).map(([sid, label]) => (
             <a key={sid} href={`#${sid}`} className={active === sid ? "on" : undefined}>
               {label}
             </a>
@@ -276,6 +279,28 @@ export default function CaseStudyPage({ id }: { id: string }) {
               </>
             )}
           </section>
+
+          {cs.motion && (
+            <section id="motion">
+              <h2>Motion icons</h2>
+              <p>
+                <T value={cs.motion.intro} />
+              </p>
+              <div className="cs-motion">
+                {cs.motion.icons.map((src) => (
+                  <div key={src} className="cs-motion-tile">
+                    <DotLottieReact
+                      src={src}
+                      autoplay
+                      loop
+                      renderConfig={LOTTIE_RENDER_CONFIG}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section id="outcome">
             <h2>Outcome</h2>

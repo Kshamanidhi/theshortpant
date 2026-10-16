@@ -1472,6 +1472,25 @@ body {
   gap: 1rem;
 }
 
+/* Motion icons — on a dark tile like the DIFC app's own background, so the
+   teal icons read the way they do in the product. */
+.cs-motion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.cs-motion-tile {
+  width: 9rem;
+  height: 9rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: #0c141a;
+  border: 1px solid #1b2a33;
+  border-radius: 1.25rem;
+}
+
 /* Outcome numbers */
 .cs-numbers {
   display: grid;

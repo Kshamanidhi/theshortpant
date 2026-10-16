@@ -40,6 +40,8 @@ export type CaseStudy = {
     steps: { label: string; caption: string; image: string; aspect: number }[];
     sketchbook?: { caption: string; image: string }[];
   };
+  // Optional: looping Lottie icons shown in their own small section.
+  motion?: { intro: Text; icons: string[] };
   outcome: { paragraphs: Text[]; numbers: { value: Text; label: Text }[] };
   reflections: Text[];
 };
@@ -167,6 +169,11 @@ export const WORK_PROJECTS: WorkProject[] = [
           { caption: "Valet parking", image: "/difc/sketch-valet.jpg" },
           { caption: "Move-in request flow", image: "/difc/sketch-move-in.jpg" },
         ],
+      },
+      motion: {
+        intro:
+          "I also designed the motion icons for DIFC+ services. Small details, but they're the first thing that makes an app feel alive.",
+        icons: ["/home-major-ug-animation.json", "/city-lounge-animation.json"],
       },
       outcome: {
         paragraphs: [
