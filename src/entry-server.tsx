@@ -5,7 +5,7 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
-export { PAGES } from "./lib/pageMeta";
+export { PAGES, NOT_FOUND_TITLE } from "./lib/pageMeta";
 
 export function render(path: string): string {
   return renderToString(

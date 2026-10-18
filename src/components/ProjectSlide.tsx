@@ -244,6 +244,10 @@ export default function ProjectSlide({
       </div>
   ) : null;
 
+  // Standalone pages (Back Pocket items) have no other heading above this,
+  // so the title is the page's <h1> there; Work slides keep <h2>.
+  const Title = standalone ? "h1" : "h2";
+
   const breakout = standalone && project.images === null && project.cardImage === null && !project.rightVideo;
   const sideStyle: React.CSSProperties = pinSides ? { position: "sticky", top: "28vh", alignSelf: "flex-start" } : {};
 
@@ -284,7 +288,7 @@ export default function ProjectSlide({
             <div className="pp-fade-up hide-on-mobile-tablet" style={{ flex: "0 0 auto", ...sideStyle }}>
               <img
                 src={project.cardImage}
-                alt=""
+                alt={`${project.title}: cover`}
                 style={{
                   display: "block",
                   width: project.cardVisual.width,
@@ -332,7 +336,7 @@ export default function ProjectSlide({
           {project.logoImage === null ? null : project.logoImage ? (
             <img
               src={project.logoImage}
-              alt=""
+              alt={`${project.title} logo`}
               className="hide-on-mobile-tablet"
               style={{ width: "9rem", height: "auto", alignSelf: "flex-start" }}
             />
@@ -369,7 +373,7 @@ export default function ProjectSlide({
           )}
 
           <div>
-            <h2
+            <Title
               style={{
                 margin: "0 0 0.65rem",
                 fontSize: "clamp(1.375rem, 2.25vw, 1.875rem)",
@@ -389,7 +393,7 @@ export default function ProjectSlide({
               ) : (
                 project.title
               )}
-            </h2>
+            </Title>
             {project.description.split("\n\n").map((para, i) => (
               <p
                 key={para}
@@ -579,7 +583,7 @@ export default function ProjectSlide({
                 transform: `rotate(${visual.rotate}deg) translate(${visual.nudgeX ?? "0"}, ${visual.nudgeY ?? "0"})`,
               };
               return project.images ? (
-                <img key={slot} src={project.images[slot]} alt="" style={{ ...style, ...frameStyle(visual.transparentAsset) }} />
+                <img key={slot} src={project.images[slot]} alt={`${project.title}: ${slot === "main" ? "main" : "detail"} screen`} style={{ ...style, ...frameStyle(visual.transparentAsset) }} />
               ) : (
                 <PlaceholderAsset key={slot} label="Screenshot" style={{ ...style, aspectRatio: "4 / 3" }} />
               );

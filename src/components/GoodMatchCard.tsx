@@ -11,8 +11,8 @@ export default function GoodMatchCard() {
     setChecked((prev) => prev.map((c, idx) => (idx === i ? !c : c)));
   }
 
-  const illo = (i: number, src: string, variant: string) => (
-    <img className={`gm-illo gm-illo-${variant}${checked[i] ? " gm-visible" : ""}`} src={src} alt="" />
+  const illo = (i: number, src: string, variant: string, alt: string) => (
+    <img className={`gm-illo gm-illo-${variant}${checked[i] ? " gm-visible" : ""}`} src={src} alt={alt} />
   );
 
   return (
@@ -22,7 +22,7 @@ export default function GoodMatchCard() {
 
       <div className="gm-stage">
         <div className="gm-side" aria-hidden="true">
-          {illo(0, "/ThreeIMG.png", "butterfly")}
+          {illo(0, "/ThreeIMG.png", "butterfly", "Illustration of a girl holding a butterfly")}
         </div>
 
         <ul className="gm-checklist">
@@ -49,8 +49,8 @@ export default function GoodMatchCard() {
         </ul>
 
         <div className="gm-side" aria-hidden="true">
-          {illo(1, "/OneIMG.png", "sitting")}
-          {illo(2, "/TwoIMG.png", "hip")}
+          {illo(1, "/OneIMG.png", "sitting", "Illustration of a girl sitting among plants")}
+          {illo(2, "/TwoIMG.png", "hip", "Illustration of a girl standing, hand on hip")}
         </div>
       </div>
 

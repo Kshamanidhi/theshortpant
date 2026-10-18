@@ -31,7 +31,7 @@ export const PAGES: PageMeta[] = [
   {
     path: "/",
     file: "index.html",
-    title: "The Short Pant — Product Designer",
+    title: "Kshamanidhi | Product Designer in India — The Short Pant",
     ogTitle: "Kshamanidhi, Product Designer",
     description: SITE_DESCRIPTION,
   },
@@ -65,7 +65,9 @@ export const PAGES: PageMeta[] = [
   })),
 ];
 
+export const NOT_FOUND_TITLE = "Page not found · Kshamanidhi";
+
 export function pageTitle(path: string): string {
   const normalized = path.length > 1 ? path.replace(/\/+$/, "") : path;
-  return (PAGES.find((page) => page.path === normalized) ?? PAGES[0]).title;
+  return PAGES.find((page) => page.path === normalized)?.title ?? NOT_FOUND_TITLE;
 }

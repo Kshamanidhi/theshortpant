@@ -24,7 +24,7 @@ function CardFace({ item, width }: { item: BackPocketItem; width: string }) {
       </div>
     );
   if (video) return <video src={video} autoPlay loop muted playsInline style={{ display: "block", ...style }} />;
-  if (image) return <img src={image} alt="" style={{ display: "block", ...style }} />;
+  if (image) return <img src={image} alt={`${item.title} (${item.kind})`} style={{ display: "block", ...style }} />;
   return <PlaceholderAsset label={item.kind} style={style} />;
 }
 

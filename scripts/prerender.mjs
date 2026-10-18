@@ -11,7 +11,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = resolve(root, "dist");
 const SITE = "https://theshortpant.com";
 
-const { render, PAGES } = await import(pathToFileURL(resolve(root, "dist-ssr/entry-server.js")).href);
+const { render, PAGES, NOT_FOUND_TITLE } = await import(pathToFileURL(resolve(root, "dist-ssr/entry-server.js")).href);
 const template = readFileSync(resolve(dist, "index.html"), "utf8");
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -51,7 +51,26 @@ for (const page of PAGES) {
   const out = resolve(dist, page.file);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
+  // /work and /back-pocket are also folders (their item pages live inside),
+  // so /work/ with a trailing slash looks for work/index.html. Write the
+  // same page there too; its canonical still points at /work.
+  if (page.path !== "/") {
+    mkdirSync(resolve(dist, page.path.slice(1)), { recursive: true });
+    writeFileSync(resolve(dist, page.path.slice(1), "index.html"), html);
+  }
   console.log(`prerendered ${page.path.padEnd(32)} → dist/${page.file}`);
+}
+
+// Not-found page. Netlify serves dist/404.html with a real 404 status for
+// any address with no file (there's no catch-all rewrite in _redirects).
+// noindex + no canonical, so it's never mistaken for a real page.
+{
+  let html = template;
+  html = swap(html, /<title>[^<]*<\/title>/, `<title>${esc(NOT_FOUND_TITLE)}</title>`, "<title>");
+  html = swap(html, /<link rel="canonical" href="[^"]*" \/>/, `<meta name="robots" content="noindex" />`, "canonical");
+  html = swap(html, /<div id="root"><\/div>/, `<div id="root" data-prerendered>${render("/404")}</div>`, "#root");
+  writeFileSync(resolve(dist, "404.html"), html);
+  console.log(`prerendered ${"(not found)".padEnd(32)} → dist/404.html`);
 }
 
 // Sitemap for search engines, built from the same page list so a new page

@@ -109,10 +109,13 @@ function ProjectSideImage({
   image,
   accent,
   placeholderClass,
+  label,
 }: {
   image?: ProjectImage;
   accent?: ProjectImage;
   placeholderClass: string;
+  // Project name, used to describe the screenshots for search and screen readers.
+  label: string;
 }) {
   if (!image) {
     return <span className={`work-row-img-el work-row-img-placeholder ${placeholderClass}`} />;
@@ -124,7 +127,7 @@ function ProjectSideImage({
         className="work-row-img-el"
         src={image.src}
         style={{ aspectRatio: image.aspect, width: image.width }}
-        alt=""
+        alt={`${label}: app screen`}
       />
     );
   }
@@ -140,13 +143,13 @@ function ProjectSideImage({
           right: accent.offset?.right,
           bottom: accent.offset?.bottom,
         }}
-        alt=""
+        alt={`${label}: detail screen`}
       />
       <img
         className="work-row-img-stack-main"
         src={image.src}
         style={{ aspectRatio: image.aspect }}
-        alt=""
+        alt={`${label}: app screen`}
       />
     </div>
   );
@@ -164,6 +167,7 @@ function ProjectContent({ project }: { project: Project }) {
         <ProjectSideImage
           image={project.images?.secondary}
           placeholderClass="work-row-img-placeholder-light"
+          label={project.title}
         />
       </div>
 
@@ -201,6 +205,7 @@ function ProjectContent({ project }: { project: Project }) {
           image={project.images?.main}
           accent={project.images?.accent}
           placeholderClass="work-row-img-placeholder-dark"
+          label={project.title}
         />
       </div>
     </>
@@ -280,7 +285,7 @@ function MobileWorkCarousel() {
                 window.scrollTo({ top: 0 });
               }}
             >
-              <div className="mw-cover">{cover && <img src={cover} alt="" loading="lazy" />}</div>
+              <div className="mw-cover">{cover && <img src={cover} alt={`${project.title}: app screen`} loading="lazy" />}</div>
               <h3 className="mw-title">{project.title}</h3>
               <p className="mw-desc">{project.description}</p>
               <span className="mw-cta">

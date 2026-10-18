@@ -34,7 +34,7 @@ export default function WorkIndexPage() {
                   <span className="wk-badge wk-badge-muted">coming soon · under NDA</span>
                   <div className="wk-cover-pair">
                     {project.locked.images.map((src) => (
-                      <img key={src} src={src} alt="" loading="lazy" />
+                      <img key={src} src={src} alt={`${project.title} app screen, blurred (under NDA)`} loading="lazy" />
                     ))}
                   </div>
                   <div className="wk-lock" aria-hidden="true">
@@ -48,7 +48,7 @@ export default function WorkIndexPage() {
               ) : (
                 <div className="wk-cover">
                   {project.caseStudy?.decisions && <span className="wk-badge">deep dive</span>}
-                  <img src={project.cover} alt="" loading="lazy" />
+                  <img src={project.cover} alt={`${project.title}: app screen`} loading="lazy" />
                 </div>
               )}
               <h2 className="wk-title">{project.title}</h2>

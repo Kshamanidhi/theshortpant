@@ -1879,3 +1879,31 @@ body {
   }
 }
 
+/* Not-found page (src/pages/NotFoundPage.tsx) */
+.nf {
+  min-height: 70vh;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 10rem 2rem 6rem;
+  box-sizing: border-box;
+}
+
+.nf h1 {
+  margin: 0.4rem 0 1rem;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.nf p {
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.nf-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nf-links a {
+  color: var(--color-fg);
+}
+

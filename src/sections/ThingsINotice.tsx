@@ -585,7 +585,7 @@ function CardThumbnail({ content, reducedMotion }: { content: Card; reducedMotio
     return (
       <img
         src={content.thumbnail}
-        alt=""
+        alt={`Illustration: ${content.claim}`}
         style={{ width: "100%", height: "100%", objectFit: content.fit ?? "contain" }}
       />
     );

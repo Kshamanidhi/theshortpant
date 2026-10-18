@@ -10,6 +10,7 @@ import CurrentlyExploring from "./sections/CurrentlyExploring";
 import Closing from "./sections/Closing";
 import WorkIndexPage from "./pages/work/WorkIndexPage";
 import CaseStudyPage from "./pages/work/CaseStudyPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import BackPocketPage from "./pages/backPocket/BackPocketPage";
 import BackPocketItemPage from "./pages/backPocket/BackPocketItemPage";
 import { RouterProvider, useRouter } from "./lib/router";
@@ -47,7 +48,8 @@ function Routes({ showBrushOverlay }: { showBrushOverlay: boolean }) {
   else if (path === "/back-pocket" || path === "/back-pocket/") page = <BackPocketPage />;
   // Keyed by id so moving between two items starts the new one collapsed.
   else if (backPocketId) page = <BackPocketItemPage key={backPocketId} id={backPocketId} />;
-  else page = <HomePage showBrushOverlay={showBrushOverlay} />;
+  else if (path === "/" || path === "/index.html") page = <HomePage showBrushOverlay={showBrushOverlay} />;
+  else page = <NotFoundPage />;
 
   return <main>{page}</main>;
 }

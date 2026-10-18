@@ -17,6 +17,11 @@ const SECTIONS = [
   ["reflections", "Reflections"],
 ] as const;
 
+// Text for alt attributes: a todo() placeholder reads as its hint.
+function plain(value: Text): string {
+  return typeof value === "string" ? value : value.todo;
+}
+
 function Paragraphs({ items }: { items: Text[] }) {
   return (
     <>
@@ -79,7 +84,7 @@ function DecisionCard({ decision, index }: { decision: Decision; index: number }
       <div className="dc-stage">
         <div className="dc-pane dc-chosen" hidden={side !== "chosen"}>
           {decision.chosen.image ? (
-            <img src={decision.chosen.image} alt="" />
+            <img src={decision.chosen.image} alt={`${plain(decision.title)}: the option I chose`} />
           ) : (
             <div className="dc-img-ph">final screen</div>
           )}
@@ -95,7 +100,7 @@ function DecisionCard({ decision, index }: { decision: Decision; index: number }
         </div>
         <div className="dc-pane dc-rejected" hidden={side !== "rejected"}>
           {decision.rejected.image ? (
-            <img src={decision.rejected.image} alt="" />
+            <img src={decision.rejected.image} alt={`${plain(decision.title)}: the option I rejected`} />
           ) : (
             <div className="dc-img-ph">rejected option</div>
           )}
@@ -196,7 +201,7 @@ export default function CaseStudyPage({ id }: { id: string }) {
             </a>
           )}
         </div>
-        <img className="cs-hero-img hide-on-mobile" src={cs.heroImage} alt="" />
+        <img className="cs-hero-img hide-on-mobile" src={cs.heroImage} alt={`${project.title}: app screen`} />
       </header>
 
       <dl className="cs-facts">
